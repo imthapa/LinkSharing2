@@ -29,7 +29,7 @@ class TopicSpec extends Specification {
     @Unroll
     def "validating topic"() {
         setup:
-        mockDomain(User)
+      //  mockDomain(User)
         User user1 = new User(firstName: "ishwar", lastName: "mani",
                 email: "ishwar@ttn.com", userName: "ishwar", password: "123456",
                 active: true, photo: [], admin: false,
@@ -51,10 +51,10 @@ class TopicSpec extends Specification {
         result == valid
 
         where:
-        name   | createdBy  | dateCreated | lastUpdated | visibility         | valid
+        name   | createdBy | dateCreated | lastUpdated | visibility        | valid
 //        "java" | user       | new Date()  | new Date()  | Visibility.PRIVATE | false
-        "json" | new User() | new Date()  | new Date()  | Visibility.PUBLIC  | true
-        "json" | new User() | new Date()  | new Date()  | Visibility.PUBLIC  | false
+        "json" | user      | new Date()  | new Date()  | Visibility.PUBLIC | true
+        "json" | user      | new Date()  | new Date()  | Visibility.PUBLIC | false
 //        "java" | user      | new Date()  | new Date()  | Visibility.PRIVATE | true
 //        "java" | new User() | null        | new Date()  | Visibility.PRIVATE | false
 //        "java" | new User() | new Date()  | new Date()  | null               | false

@@ -107,6 +107,7 @@ dataSource:
 environments:
     development:
         dataSource:
+            format_sql: true
             logSql: true
             dbCreate: create-drop
             url: jdbc:mysql://localhost:3306/linksharing
