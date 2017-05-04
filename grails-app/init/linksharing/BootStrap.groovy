@@ -13,6 +13,7 @@ class BootStrap {
         //createResources()
         checkResourceCount()
         subscribeTopics(User.get(1))
+        createReadingItems(User.get(1))
     }
     def destroy = {
     }
@@ -120,42 +121,69 @@ class BootStrap {
 
     //todo Q17) Add subscribeTopics for user to subscribe all the topics which are not created by user
     def subscribeTopics(User user){
-        List<Topic> topicsNotSubscribed = Topic.findAllByCreatedByNotEqual(user)
+        List<Topic> topicsNotCreated = Topic.findAllByCreatedByNotEqual(user)
        // List<Topic> topicsNotSubscribed = Topic.findAllByCreatedByNotInList([user])  //not working why ???
         List check = Topic.findAllByIdNotEqual(1)
         log.info("++++++++++++++++the checked ids are $check ++++++++++++++++++++++")
-        log.info("$user has not subscribed to ${topicsNotSubscribed*.id}")
-        topicsNotSubscribed.each {
+        log.info("$user has not subscribed to ${topicsNotCreated*.id}")
+        topicsNotCreated.each {
+            //todo Q18) Subscription should be created only if the subscription do not exist for user and topic
+            List notSubscribed = Subscription.findByTopicAndUser(it,user);
+            if(notSubscribed == null){
+                Subscription subscription = new Subscription(topic: it,user: user,seriousness: Seriousness.CASUAL)
+                subscription.save()
 
-            Subscription subscription = new Subscription(topic: it,user: user,seriousness: Seriousness.CASUAL)
-            subscription.save()
-            if(subscription.hasErrors())
-                log.info(subscription.errors.allErrors)
-            else
-                log.info("new subscription is made for $user in topic ${it.name}")
+                //todo Q19) Errors should be logged
+                if(subscription.hasErrors())
+                    log.info(subscription.errors.allErrors)
+                else{
+                    //todo Q20) log statement when subscription is created with user and topic object
+                    log.info("new subscription is made for $user in topic ${it.name}")
+                }
+
+            }
+
+
         }
     }
 
     //todo Q22) Add createReadingItems in bootstrap to create dummy reading items
-    def createReadingItems(){
-
+    // todo Q23) Resources which are not created by the user in the topics subscribed by him/her should have in his/her reading item.
+    def createReadingItems(User user){
+        List<Subscription> subscriptionList = Subscription.findAllByUser(user)
+        log.info("++++++++++++++++++++ $subscriptionList +++++++++++++++++")
+        List<Topic> subscribedTopics = Topic.findAllByIdInList(subscriptionList*.topicId);
+        log.info("subscribed topics are $subscribedTopics")
+        List<Resource> toBeRead = Resource.findAllByCreatedByNotEqualAndTopicInList(user,subscribedTopics)
+      //  List<ReadingItem> alreadyRead = ReadingItem.findAllByUser(user)
+        log.info("----------------$toBeRead--------------")
+        toBeRead.each{
+            new ReadingItem(user: user,resource: it,isRead: true).save()
+            //it.save()
+            if(it.hasErrors()){
+                log.info(it.errors)
+            }else{
+                log.info("reading items saved successfully!!!!!!!!")
+            }
+        }
     }
 
-//    def doSubscription = {
-//        user, topic ->
-//            Subscription subscription = new Subscription(user: user,topic: topic,seriousness: Seriousness.VERY_SERIOUS)
-//           // topic.addToSubscriptions(subscription)
-//            subscription.save()
-//
-//            if(subscription.hasErrors()){
-//                log.error("subscription failed for $subscription.errors.allErrors")
-//            }
-//            else {
-//                log.info("$user has subscribed $topic")
-//            }
-//
-//    }
+/*    def doSubscription = {
+        user, topic ->
+            Subscription subscription = new Subscription(user: user,topic: topic,seriousness: Seriousness.VERY_SERIOUS)
+           // topic.addToSubscriptions(subscription)
+            subscription.save()
 
+            if(subscription.hasErrors()){
+                log.error("subscription failed for $subscription.errors.allErrors")
+            }
+            else {
+                log.info("$user has subscribed $topic")
+            }
+
+    }*/
+
+/*
     void insert() {
         def grailsApplication
         User user = new User(firstName: "ishwar", lastName: "mani",
@@ -168,6 +196,7 @@ class BootStrap {
                 visibility: Visibility.PRIVATE)
         topic.save()
     }
+*/
 
 
 }

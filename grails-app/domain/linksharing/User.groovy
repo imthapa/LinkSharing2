@@ -12,15 +12,15 @@ class User {
     Date dateCreated
     Date lastUpdated
 
-    static transients = ['name']
-
-    String name() {
-        return "$firstName $lastName"
-    }
     static hasMany = [topic: Topic, subscription: Subscription, resource: Resource, readItem: ReadingItem]
 
     static mapping = {
         photo(sqlType: 'longBlob')
+    }
+    static transients = ['name']
+
+    String name() {
+        return "$firstName $lastName"
     }
 
     static constraints = {

@@ -12,7 +12,6 @@ class Topic {
     Date dateCreated
 
     static hasMany = [subscription: Subscription, resource: Resource]
-    // User createdBy
     static belongsTo = [createdBy: User]
 
 //    static mapping = {
@@ -45,5 +44,14 @@ class Topic {
                 log.info("$createdBy has subscribed $this")
             }
         }
+    }
+
+    // todo Q21) toString should be implemented for Topic with topic name and for User with username
+    @Override
+    public String toString() {
+        return "Topic{" +
+                "createdBy=" + createdBy.userName +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

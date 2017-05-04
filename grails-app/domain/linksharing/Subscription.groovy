@@ -14,6 +14,5 @@ class Subscription {
         user nullable: false, unique: 'topic'
         topic nullable: false, unique: 'user'
         seriousness nullable: false
-
     }
 }
