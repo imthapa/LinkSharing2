@@ -1,10 +1,10 @@
 package linksharing
 
-class LinkResource extends Resource{
+class LinkResource extends Resource {
 
     String url;
 
     static constraints = {
-        url(nullable: false)
+        url(nullable: false, url: true)
     }
 }

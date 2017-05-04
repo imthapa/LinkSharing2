@@ -2,9 +2,10 @@ package linksharing
 
 class ReadingItem {
     Boolean isRead
-    static belongsTo = [user: User, resource: Resource]
     Date dateCreated
     Date lastUpdated
+
+    static belongsTo = [user: User, resource: Resource]
 
     static constraints = {
         user(nullable: false)

@@ -50,6 +50,7 @@ dependencies {
 }
 
 bootRun {
+    jvmArgs = ['-Dlocal.config.location=grails-app/conf/Config.groovy']
     jvmArgs('-Dspring.output.ansi.enabled=always')
     addResources = true
 }
