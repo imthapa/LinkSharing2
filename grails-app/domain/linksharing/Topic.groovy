@@ -7,8 +7,8 @@ import com.ttnd.linksharing.util.Visibility
 class Topic {
 
     String name
-    Date lastUpdated
     Visibility visibility
+    Date lastUpdated
     Date dateCreated
 
     static hasMany = [subscription: Subscription, resource: Resource]
@@ -49,9 +49,6 @@ class Topic {
     // todo Q21) toString should be implemented for Topic with topic name and for User with username
     @Override
     public String toString() {
-        return "Topic{" +
-                "createdBy=" + createdBy.userName +
-                ", name='" + name + '\'' +
-                '}';
+        return "${createdBy.userName} $name";
     }
 }

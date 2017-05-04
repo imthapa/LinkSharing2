@@ -41,4 +41,18 @@ class UserSpec extends Specification {
         "prashant" | "gupta"  | "prashantttn.com" | "prashant" | "123456" | true   | []    | true  | new Date()  | new Date()  | false
 
     }
+
+    //todo Q28a) Add test cases for tostring of Topic and User
+    def "testing user toString"() {
+        setup:
+        User user2 = new User(userName: userName, email: email, admin: admin)
+        String check = user2.toString()
+        expect:
+        check == validate
+
+        where:
+        userName | email            | admin | validate
+        "ishwar" | "ishwar@ttn.com" | true  | "ishwar"
+
+    }
 }

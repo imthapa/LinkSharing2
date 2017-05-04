@@ -1,19 +1,25 @@
 package linksharing
 
+import com.ttnd.linksharing.util.DefaultPasswords
 import com.ttnd.linksharing.util.Seriousness
 import com.ttnd.linksharing.util.Visibility
 import grails.util.Holders
+
+import javax.validation.groups.Default
 
 class BootStrap {
 
     def init = { servletContext ->
         // insert()
+        println(new Topic(name: "java",visibility: Visibility.PRIVATE,createdBy: new User(userName: "ishwar")))
         createUsers()
         createTopics()
         //createResources()
         checkResourceCount()
         subscribeTopics(User.get(1))
         createReadingItems(User.get(1))
+     //   createResourceRatings(User.get(2))
+        rateReadResources(User.get(1))
     }
     def destroy = {
     }
@@ -26,7 +32,7 @@ class BootStrap {
         //todo Q4. Users will be created only when there are no records in user table
         if (User.count == 0) {
             User admin = new User(firstName: "ishwar", lastName: "mani",
-                    email: "ishwar@ttn.com", userName: "ishwar", password: "122334",//grailsApplication.config.defaultPassword,
+                    email: "ishwar@ttn.com", userName: "ishwar", password:DefaultPasswords.password1,//"122334",//grailsApplication.config.defaultPassword,
                     active: true, photo: [], admin: true,
                     dateCreated: new Date(), lastUpdated: new Date())
             //todo Q2. Use failOnError and flush true for persisting users
@@ -89,7 +95,7 @@ class BootStrap {
                     LinkResource linkResource = new LinkResource(description: "${topicName.name} : $description", url: links[counter],
                             createdBy: user, topic: topicName)
 
-                    // todo GORM-1    16) Creator of the resource should be same as creator of the topic
+                    // todo Q16) Creator of the resource should be same as creator of the topic
                     //user is the one who has created the topic.
                     DocumentResource documentResource = new DocumentResource(description: "${topicName.name} : $description",
                             filePath: document[counter], createdBy: user, topic: topicName)
@@ -120,23 +126,23 @@ class BootStrap {
     }
 
     //todo Q17) Add subscribeTopics for user to subscribe all the topics which are not created by user
-    def subscribeTopics(User user){
+    def subscribeTopics(User user) {
         List<Topic> topicsNotCreated = Topic.findAllByCreatedByNotEqual(user)
-       // List<Topic> topicsNotSubscribed = Topic.findAllByCreatedByNotInList([user])  //not working why ???
+        // List<Topic> topicsNotSubscribed = Topic.findAllByCreatedByNotInList([user])  //not working why ???
         List check = Topic.findAllByIdNotEqual(1)
         log.info("++++++++++++++++the checked ids are $check ++++++++++++++++++++++")
         log.info("$user has not subscribed to ${topicsNotCreated*.id}")
         topicsNotCreated.each {
             //todo Q18) Subscription should be created only if the subscription do not exist for user and topic
-            List notSubscribed = Subscription.findByTopicAndUser(it,user);
-            if(notSubscribed == null){
-                Subscription subscription = new Subscription(topic: it,user: user,seriousness: Seriousness.CASUAL)
+            List notSubscribed = Subscription.findByTopicAndUser(it, user);
+            if (notSubscribed == null) {
+                Subscription subscription = new Subscription(topic: it, user: user, seriousness: Seriousness.CASUAL)
                 subscription.save()
 
                 //todo Q19) Errors should be logged
-                if(subscription.hasErrors())
+                if (subscription.hasErrors())
                     log.info(subscription.errors.allErrors)
-                else{
+                else {
                     //todo Q20) log statement when subscription is created with user and topic object
                     log.info("new subscription is made for $user in topic ${it.name}")
                 }
@@ -148,22 +154,75 @@ class BootStrap {
     }
 
     //todo Q22) Add createReadingItems in bootstrap to create dummy reading items
-    // todo Q23) Resources which are not created by the user in the topics subscribed by him/her should have in his/her reading item.
-    def createReadingItems(User user){
+    //todo Q23) Resources which are not created by the user in the topics subscribed by him/her should have in his/her reading item.
+    def createReadingItems(User user) {
         List<Subscription> subscriptionList = Subscription.findAllByUser(user)
-        log.info("++++++++++++++++++++ $subscriptionList +++++++++++++++++")
+        log.info("++++++++++++++++++++ $subscriptionList ++++++++++++++++++++")
         List<Topic> subscribedTopics = Topic.findAllByIdInList(subscriptionList*.topicId);
+        //List<Topic> subscribedTopics = subscriptionList*.topic;
+
         log.info("subscribed topics are $subscribedTopics")
-        List<Resource> toBeRead = Resource.findAllByCreatedByNotEqualAndTopicInList(user,subscribedTopics)
-      //  List<ReadingItem> alreadyRead = ReadingItem.findAllByUser(user)
+        List<Resource> toBeRead = Resource.findAllByCreatedByNotEqualAndTopicInList(user, subscribedTopics)
+        List<Integer> tRead = toBeRead*.id;
+
+        List<ReadingItem> alreadyRead = ReadingItem.findAllByUser(user)
+        List<Integer> aRead = alreadyRead*.id;
+        //todo Q24) Reading item of resource should be created only if it does not already exit in users reading item
+        List toBeInserted = tRead - aRead;
         log.info("----------------$toBeRead--------------")
-        toBeRead.each{
-            new ReadingItem(user: user,resource: it,isRead: true).save()
+        toBeInserted.each {
+            Resource resource = Resource.get(it)
+            new ReadingItem(user: user, resource: resource, isRead: true).save()
             //it.save()
-            if(it.hasErrors()){
-                log.info(it.errors)
-            }else{
+            if (resource.hasErrors()) {
+                log.info(resource.errors)
+            } else {
                 log.info("reading items saved successfully!!!!!!!!")
+            }
+        }
+
+        /*log.info("----------------$toBeRead--------------")
+        toBeRead.each {
+            new ReadingItem(user: user, resource: it, isRead: true).save()
+            //it.save()
+            if (it.hasErrors()) {
+                log.info(it.errors)
+            } else {
+                log.info("reading items saved successfully!!!!!!!!")
+            }
+        }*/
+    }
+
+    //todo Q25) Add createResourceRatings to add dummy ratings
+    //todo Q26) Add rating for all the unread reading items of the user
+    def createResourceRatings(User user) {
+        List<Subscription> subscriptionList = Subscription.findAllByUser(user)
+        log.info("++++++++++++++++++++ $subscriptionList for giving ratings ++++++++++++++++++++")
+        List<Topic> subscribedTopics = subscriptionList*.topic;
+        List<Resource> resources = Resource.findAllByTopicInList(subscribedTopics);
+        resources.each {
+            ResourceRating resourceRating = new ResourceRating(user: user, resource: it, score: 4)
+            resourceRating.save()
+            if(resourceRating.hasErrors())
+                log.info(resourceRating.errors)
+            else {
+                log.info("$resourceRating is inserted successfully inserted!!!")
+            }
+        }
+    }
+
+    //todo 27) createdBy of resourcerating should be createdby of reading item and resource of resourcerating should be resource of readingitem
+    def rateReadResources(User user) {
+        List<ReadingItem> readItem = ReadingItem.findAllByUser(user)
+        log.info("---------------$readItem-----------")
+     //   List<Resource> resources = Resource.findAllByTopicInList(subscribedTopics);
+        readItem.each {
+            ResourceRating resourceRating = new ResourceRating(user: it.user, resource: it.resource, score: 4)
+            resourceRating.save()
+            if(resourceRating.hasErrors())
+                log.info(resourceRating.errors)
+            else {
+                log.info("$resourceRating is inserted successfully inserted!!!")
             }
         }
     }

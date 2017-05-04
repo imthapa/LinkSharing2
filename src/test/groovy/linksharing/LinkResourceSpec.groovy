@@ -1,5 +1,6 @@
 package linksharing
 
+import com.ttnd.linksharing.util.Visibility
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
@@ -16,7 +17,21 @@ class LinkResourceSpec extends Specification {
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == false
+        expect: "fix me"
+        true == false
+    }
+
+    //todo Q29) Add toString for linkresource with url
+    def "test for toString"() {
+        setup:
+        Resource linkResource = new LinkResource(url: url)
+        String link = linkResource.toString()
+
+        expect:
+        link == flag
+
+        where:
+        url                     | flag
+        "http://www.google.com" | "http://www.google.com"
     }
 }

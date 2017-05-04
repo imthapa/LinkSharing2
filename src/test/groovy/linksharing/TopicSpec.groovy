@@ -9,8 +9,8 @@ import spock.lang.Unroll
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(Topic)
-@Mock(User)
+//@TestFor(Topic)
+//@Mock(User)
 class TopicSpec extends Specification {
     static User user = new User()
 
@@ -29,7 +29,7 @@ class TopicSpec extends Specification {
     @Unroll
     def "validating topic"() {
         setup:
-      //  mockDomain(User)
+        //  mockDomain(User)
         User user1 = new User(firstName: "ishwar", lastName: "mani",
                 email: "ishwar@ttn.com", userName: "ishwar", password: "123456",
                 active: true, photo: [], admin: false,
@@ -63,5 +63,18 @@ class TopicSpec extends Specification {
 //        "c++"  | new User() | new Date()  | new Date()  | "Private"          | false
 
 
+    }
+
+    //todo Q28b) Add test cases for tostring of Topic and User
+    def "test for toString"() {
+        Topic topic = new Topic(name: name, visibility: visibility, createdBy: createdBy)
+        String result = topic.toString()
+
+        expect:
+        result == flag
+
+        where:
+        name   | createdBy                    | visibility         | flag
+        "java" | new User(userName: "ishwar") | Visibility.PRIVATE | "ishwar java"
     }
 }

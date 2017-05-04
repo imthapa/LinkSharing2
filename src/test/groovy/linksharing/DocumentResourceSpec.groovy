@@ -16,7 +16,21 @@ class DocumentResourceSpec extends Specification {
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == false
+        expect: "fix me"
+        true == false
+    }
+
+    //todo Q30) Add test case for document resource and linkresource tostring
+    def "test for toString"() {
+        setup:
+        Resource documentResource = new DocumentResource(filePath: filepath)
+        String link = documentResource.toString()
+
+        expect:
+        link == flag
+
+        where:
+        filepath                           | flag
+        "http://www.google.com/groovy.pdf" | "http://www.google.com/groovy.pdf"
     }
 }

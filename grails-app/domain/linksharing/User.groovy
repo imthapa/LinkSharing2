@@ -33,4 +33,9 @@ class User {
         admin(nullable: true)
         active(nullable: true)
     }
+
+    @Override
+    String toString() {
+        return "$userName"
+    }
 }
