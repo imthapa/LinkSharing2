@@ -11,15 +11,17 @@ class BootStrap {
 
     def init = { servletContext ->
         // insert()
-        println(new Topic(name: "java",visibility: Visibility.PRIVATE,createdBy: new User(userName: "ishwar")))
+        //  println(new Topic(name: "java",visibility: Visibility.PRIVATE,createdBy: new User(userName: "ishwar")))
         createUsers()
-        createTopics()
-        //createResources()
-        checkResourceCount()
-        subscribeTopics(User.get(1))
-        createReadingItems(User.get(1))
-     //   createResourceRatings(User.get(2))
-        rateReadResources(User.get(1))
+                createTopics()
+               //createResources()
+               checkResourceCount()
+               subscribeTopics(User.get(1))
+               createReadingItems(User.get(1))
+            //   createResourceRatings(User.get(2))
+               rateReadResources(User.get(1))
+
+        //   setCurrentStudent()
     }
     def destroy = {
     }
@@ -32,8 +34,8 @@ class BootStrap {
         //todo Q4. Users will be created only when there are no records in user table
         if (User.count == 0) {
             User admin = new User(firstName: "ishwar", lastName: "mani",
-                    email: "ishwar@ttn.com", userName: "ishwar", password:DefaultPasswords.password1,//"122334",//grailsApplication.config.defaultPassword,
-                    active: true, photo: [], admin: true,
+                    email: "ishwar@ttn.com", userName: "ishwar", password: DefaultPasswords.password1,//"122334",//grailsApplication.config.defaultPassword,
+                    active: false, photo: [], admin: true,
                     dateCreated: new Date(), lastUpdated: new Date())
             //todo Q2. Use failOnError and flush true for persisting users
             admin.save(flush: true, failOnError: true)
@@ -203,7 +205,7 @@ class BootStrap {
         resources.each {
             ResourceRating resourceRating = new ResourceRating(user: user, resource: it, score: 4)
             resourceRating.save()
-            if(resourceRating.hasErrors())
+            if (resourceRating.hasErrors())
                 log.info(resourceRating.errors)
             else {
                 log.info("$resourceRating is inserted successfully inserted!!!")
@@ -215,11 +217,11 @@ class BootStrap {
     def rateReadResources(User user) {
         List<ReadingItem> readItem = ReadingItem.findAllByUser(user)
         log.info("---------------$readItem-----------")
-     //   List<Resource> resources = Resource.findAllByTopicInList(subscribedTopics);
+        //   List<Resource> resources = Resource.findAllByTopicInList(subscribedTopics);
         readItem.each {
             ResourceRating resourceRating = new ResourceRating(user: it.user, resource: it.resource, score: 4)
             resourceRating.save()
-            if(resourceRating.hasErrors())
+            if (resourceRating.hasErrors())
                 log.info(resourceRating.errors)
             else {
                 log.info("$resourceRating is inserted successfully inserted!!!")
@@ -257,5 +259,13 @@ class BootStrap {
     }
 */
 
+    /* def setCurrentStudent() {
+       //  def aStudent = [name: "Student1"]
+       //  session["user"] = aStudent
+         session['username'] = 'ishwar'
+         session['password'] = '123456'
+         render "Added ${session.username} and ${session.password}to the session."
+     }
+ */
 
 }
