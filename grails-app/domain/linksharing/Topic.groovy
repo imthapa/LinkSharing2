@@ -14,10 +14,12 @@ class Topic {
     static hasMany = [subscription: Subscription, resource: Resource]
     static belongsTo = [createdBy: User]
 
-//    static mapping = {
-//        //id composite: ['createdBy','name']
-//        createdBy column: createdBy
-//    }
+    //todo Domain2 - Q1. Add default sorting: - Topic domain should be default sorted by name asc
+    static mapping = {
+        //id composite: ['createdBy','name']
+        //createdBy column: createdBy
+        sort name: 'asc'
+    }
 
     static constraints = {
         name(unique: 'createdBy', nullable: false, blank: false)
@@ -36,7 +38,7 @@ class Topic {
             Subscription subscription = new Subscription(user: createdBy, topic: this, seriousness: Seriousness.VERY_SERIOUS)
             // topic.addToSubscriptions(subscription)
             this.addToSubscription(subscription)
-           // subscription.save()
+            // subscription.save()
             //todo Q9. Errors should be logged if topic or subscriptions is not saved
             if (subscription.hasErrors()) {
                 log.error("subscription failed for $subscription.errors.allErrors")

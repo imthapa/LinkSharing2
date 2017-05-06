@@ -15,7 +15,9 @@ class User {
 
     static hasMany = [topic: Topic, subscription: Subscription, resource: Resource, readItem: ReadingItem]
 
+    //todo Domain2 - Q2 User should be default sorted by the id desc so that latest created user comes first
     static mapping = {
+        sort id : 'desc'
         photo(sqlType: 'longBlob')
     }
     static transients = ['name', 'confirmPassword']
@@ -23,6 +25,7 @@ class User {
     String name() {
         return "$firstName $lastName"
     }
+
 
     static constraints = {
         email(unique: true, blank: false, nullable: false, email: true)

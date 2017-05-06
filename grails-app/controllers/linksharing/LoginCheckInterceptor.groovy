@@ -4,7 +4,7 @@ package linksharing
 class LoginCheckInterceptor {
 
     LoginCheckInterceptor(){
-        matchAll().excludes(controller:'login')
+       // matchAll().excludes(controller:'login')
     }
 
     //todo Q12. Add session check filter in application interceptor

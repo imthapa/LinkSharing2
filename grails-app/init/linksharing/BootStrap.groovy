@@ -13,15 +13,16 @@ class BootStrap {
         // insert()
         //  println(new Topic(name: "java",visibility: Visibility.PRIVATE,createdBy: new User(userName: "ishwar")))
         createUsers()
-                createTopics()
-               //createResources()
-               checkResourceCount()
-               subscribeTopics(User.get(1))
-               createReadingItems(User.get(1))
-            //   createResourceRatings(User.get(2))
-               rateReadResources(User.get(1))
-
+        //getUsers()
+        createTopics()
+        createResources()
+        checkResourceCount()
+        //subscribeTopics(User.get(1))
+        createReadingItems(User.get(1))
+        //   createResourceRatings(User.get(2))
+        rateReadResources(User.get(1))
         //   setCurrentStudent()
+        //getTopics()
     }
     def destroy = {
     }
@@ -35,7 +36,7 @@ class BootStrap {
         if (User.count == 0) {
             User admin = new User(firstName: "ishwar", lastName: "mani",
                     email: "ishwar@ttn.com", userName: "ishwar", password: DefaultPasswords.password1,//"122334",//grailsApplication.config.defaultPassword,
-                    active: false, photo: [], admin: true,
+                    confirmPassword: DefaultPasswords.password1, active: false, photo: [], admin: true,
                     dateCreated: new Date(), lastUpdated: new Date())
             //todo Q2. Use failOnError and flush true for persisting users
             admin.save(flush: true, failOnError: true)
@@ -48,7 +49,7 @@ class BootStrap {
             log.info "============normal user creating========"
             User normalUser = new User(firstName: "uday", lastName: "pratap",
                     email: "uday.pratap@tothenew.com", userName: "uday", password: "123456",
-                    active: true, photo: [], admin: false,
+                    confirmPassword: "123456", active: true, photo: [], admin: false,
                     dateCreated: new Date(), lastUpdated: new Date())
             normalUser.save(flush: true, failOnError: true)
             log.info "============normal user creating========"
@@ -138,7 +139,7 @@ class BootStrap {
             //todo Q18) Subscription should be created only if the subscription do not exist for user and topic
             List notSubscribed = Subscription.findByTopicAndUser(it, user);
             if (notSubscribed == null) {
-                Subscription subscription = new Subscription(topic: it, user: user, seriousness: Seriousness.CASUAL)
+                Subscription subscription = new Subscription(topic: it, user: user)
                 subscription.save()
 
                 //todo Q19) Errors should be logged
@@ -227,6 +228,16 @@ class BootStrap {
                 log.info("$resourceRating is inserted successfully inserted!!!")
             }
         }
+    }
+
+    def getTopics() {
+        List<Topic> topicList = Topic.findAll()
+        log.info("$topicList")
+    }
+
+    def getUsers() {
+        List<User> userList = User.findAll()
+        log.info("$userList")
     }
 
 /*    def doSubscription = {
