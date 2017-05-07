@@ -10,18 +10,18 @@ import javax.validation.groups.Default
 class BootStrap {
 
     def init = { servletContext ->
-        // insert()
-        //  println(new Topic(name: "java",visibility: Visibility.PRIVATE,createdBy: new User(userName: "ishwar")))
+        //insert()
+        //println(new Topic(name: "java",visibility: Visibility.PRIVATE,createdBy: new User(userName: "ishwar")))
         createUsers()
         //getUsers()
         createTopics()
         createResources()
         checkResourceCount()
-        //subscribeTopics(User.get(1))
+        subscribeTopics(User.get(1))
         createReadingItems(User.get(1))
-        //   createResourceRatings(User.get(2))
+        createResourceRatings(User.get(2))
         rateReadResources(User.get(1))
-        //   setCurrentStudent()
+        //setCurrentStudent()
         //getTopics()
     }
     def destroy = {

@@ -1,6 +1,6 @@
 package linksharing
 
-import com.ttnd.linksharing.util.UserCO
+import com.ttnd.linksharing.co.UserCO
 
 //todo Q1. Add logincontroller with index,loginHandler and logout action
 class LoginController {
@@ -13,7 +13,8 @@ class LoginController {
 //          log.info("aldhfkhdfkjhfkjhk")
             redirect(controller: 'user', action: 'index')
         } else {
-            render "Failure"
+            List r = Resource.topPost()
+            render "$r"
             //forward(action : 'loginHandler')
         }
             //render "hello welcome to grails"

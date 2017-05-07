@@ -1,4 +1,4 @@
-package com.ttnd.linksharing.util
+package com.ttnd.linksharing.co
 
 import grails.validation.Validateable
 

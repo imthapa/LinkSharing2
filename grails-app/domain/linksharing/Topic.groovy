@@ -2,6 +2,10 @@ package linksharing
 
 import com.ttnd.linksharing.util.Seriousness
 import com.ttnd.linksharing.util.Visibility
+import com.ttnd.linksharing.vo.TopicVO
+import org.hibernate.criterion.CriteriaSpecification
+import org.hibernate.sql.JoinType
+import org.hibernate.type.IntegerType
 
 
 class Topic {
@@ -51,6 +55,53 @@ class Topic {
     // todo Q21) toString should be implemented for Topic with topic name and for User with username
     @Override
     public String toString() {
-        return "${createdBy.userName} $name";
+        return "createdBy : ${createdBy.userName} topicname: $name";
     }
+
+    //todo GORM2 Q4b) Create static method getTrendingTopics in Topic domain which will return list of TopicVO
+/*  //sql query : select t.id,visibility,t.created_by_id,name,count(t.id) c from topic t join resource r on t.id = r.topic_id group by (t.id) order by c desc;
+   4. Add resource show action and get trending topics also
+    - Public Topic with maximum resources is considered as a trending topic
+    - Create static method getTrendingTopics in Topic domain which will return list of TopicVO
+    - TopicVO will have id,name,visibility,count,createdBy fields
+    - Use create alias and groupproperty in criteria
+    - Use count for getting count of resources of a topic
+    - Use multiple order statement first one ordered by resource count and second one ordered by topic name
+    - Maximum 5 records should be shown
+    - Topic with maximum resource should come first
+**/
+    static def getTrendingTopics(){
+        List result = Topic.createCriteria().list {
+            projections{
+//               sqlProjection 'id as id ,name as name',['id','name'],[Integer,String]
+                property('id')// as IntegerType
+                property('name')// as String
+                property('visibility')// as String
+              //  count('res.id')
+                count('id','c')// as Integer
+                property('createdBy')// as String
+            }
+            eq('visibility',Visibility.PRIVATE)
+            createAlias('resource','res',JoinType.INNER_JOIN)
+            groupProperty('id')
+            count('id')
+            maxResults 5
+            order('c',"desc")
+            order('name')
+        }
+   /*     result.collect({
+          //  List brr = it.toString().tokenize("[")
+            List arr = it.toString().split(",")
+            println("thi is output ${arr.size()}")
+//           new TopicVO(id: arr[0].toString() as Integer,name: arr[1],visibility: Visibility.toVisibility(arr[2]),count: arr[3] as Integer,createdBy: arr[4])
+        })
+        result.collect({
+            println("thi is output ${it.class}")
+            new TopicVO(id: it[0],name: it[1],visibility: it[2],count: it[3],createdBy: it[4])
+        })*/
+      //  new TopicVO(id: result[0],name: result[1],visibility: result[2],count: result[3],createdBy: result[4])
+        result
+    }
+
+
 }

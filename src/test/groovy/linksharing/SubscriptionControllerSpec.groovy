@@ -21,7 +21,6 @@ class SubscriptionControllerSpec extends Specification {
     }
 
     //todo Domain2 Q19. Write the test cases for subscription save, update, delete functionality.
-
     def "test for save()"(){
 
     }

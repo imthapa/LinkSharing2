@@ -1,6 +1,8 @@
 package linksharing
 
+import com.ttnd.linksharing.co.ResourceSearchCO
 import com.ttnd.linksharing.util.Visibility
+import com.ttnd.linksharing.vo.TopicVO
 import org.hibernate.ObjectNotFoundException
 import org.hibernate.resource.transaction.backend.jta.internal.synchronization.ExceptionMapper
 
@@ -12,7 +14,8 @@ class TopicController {
     }
 
     //todo Q15) Add show action for topic which will take id as a parameter.
-    def show(Integer id) {
+    //todo GORM2 Q1d) Update topic show action which will take ResourceSearchCO as an argument other than long id
+    def show(ResourceSearchCO resourceSearchCO,Integer id) {
 //        Topic topic = Topic.findById(id)
         //todo Domain2 - Q3. Use read() for /topic/show and load() for /resource/delete & /topic/delete action.
         Topic topic = Topic.read(id)
@@ -54,14 +57,14 @@ class TopicController {
     }
 
     //todo Q4) Exception of object not found should be handled in resource delete
-    def exceptionHandler(Exception e) {
-        /*
+ /*   def exceptionHandler(Exception e) {
+        *//*
            This method will be called if any unhandled Execption occurs in the code
-        */
+        *//*
 //        ['error':'Something Went Wrong ,Our Tech. Team will Analysize it shortly']
 //        render view: 'notFound',  model: [id: params.id, exception: e]
         render "Something Went Wrong"
-    }
+    }*/
 
     //todo Domain2 Q5) Add topic save action in TopicController
     //todo Domain2 Q6) Add save action in topic controller, which takes a topic and string seriousness as an argument
@@ -89,5 +92,18 @@ class TopicController {
             redirect(controller: "login", action: "index")
         }
 
+    }
+
+    def showtrending(){
+        List topicVO = Topic.getTrendingTopics()
+        log.info("$topicVO")
+        render "$topicVO"
+       /* render """
+                    topicId : $TopicVO.id
+                    topicName : $TopicVO.name
+                    visibility ; $TopicVO.visibility
+                    count : $TopicVO.count
+                    createdBy : $TopicVO.createdBy
+                    """*/
     }
 }

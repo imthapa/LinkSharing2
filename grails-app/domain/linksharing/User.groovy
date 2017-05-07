@@ -1,5 +1,7 @@
 package linksharing
 
+import com.ttnd.linksharing.co.SearchCO
+
 class User {
     String firstName;
     String lastName;
@@ -43,6 +45,33 @@ class User {
         admin(nullable: true)
         active(nullable: true)
         confirmPassword(nullable: true, blank: true)
+    }
+
+    /*
+6. Add Inbox feature on user/index when user is loggedin
+  - Create method getUnReadResources in user domain which takes SearchCO argument and returns unreaditems of user from ReadingItem domain
+  - The search should also work using user/index page, q parameter of SearchCO. If searchco.q is found then getUnReadResources method will search the items based on ilike of resource.description.
+  - The pagination parameter should also be used in getUnReadResources criteria query. Create readingItem/changeIsRead action which takes Long id and Boolean isRead
+  - User executeUpdate to change the isRead of readingItem with given id
+  - If value returned by executeUpdate is 0 then render error else render success
+  */
+    static def getUnReadResources(SearchCO searchCO){
+        List result = ReadingItem.createCriteria().list {
+            if(searchCO && searchCO.q){
+//                eq('resource',Resource.findByDescriptionIlike(searchCO.q))
+                'resource'{
+                    ilike("description","%${searchCO.q}%")
+                }
+            }
+            projections{
+                property('id')
+                property('resource')
+            }
+            eq('isRead',false)
+            maxResults 5
+//            eq('user',this)
+        }
+        result
     }
 
     @Override
