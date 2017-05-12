@@ -3,6 +3,7 @@ package linksharing
 import com.ttnd.linksharing.util.Seriousness
 import com.ttnd.linksharing.util.Visibility
 import com.ttnd.linksharing.vo.TopicVO
+import com.ttnd.linksharing.vo.UserDetailsVO
 import org.hibernate.criterion.CriteriaSpecification
 import org.hibernate.sql.JoinType
 import org.hibernate.transform.Transformers
@@ -57,7 +58,7 @@ class Topic {
     // todo Q21) toString should be implemented for Topic with topic name and for User with username
     @Override
     public String toString() {
-        return "createdBy : ${createdBy.userName} topicname: $name";
+        return "$name";
     }
 
     //todo GORM2 Q4b) Create static method getTrendingTopics in Topic domain which will return list of TopicVO
@@ -117,18 +118,26 @@ class Topic {
        }
    */
     //todo Grails Views Q18) Create transient method getSubscribedUsers in topic domain to get all the subscribed users
-    def getSubscribedUsers(Topic topic) {
-        allSubscribedUsers = Subscription.createCriteria().list {
+    static def getSubscribedUsers(Topic topic) {
+        List<UserDetailsVO> allSubsUsers = []
+        List allSubscribedUsers = Subscription.createCriteria().list {
             projections {
-                property('id')
+                property('user')
             }
-            'topic' {
-                eq('id', topic.id)
-            }
+            eq('topic',topic)
         }
 
         println(allSubscribedUsers)
-        allSubscribedUsers
+        allSubscribedUsers.each {
+            User user = it
+            allSubsUsers.add(new UserDetailsVO(userName: user.userName,
+                    userFullName: user.fullName,
+                    subscriptionCount: user.subscription.size(),
+                    topicCount: user.topic.size(),
+                    userId: user.id))
+
+        }
+        allSubsUsers
     }
 /*
 
@@ -155,21 +164,21 @@ class Topic {
     }
 */
 
-    static def getTrendingTopics(){
+    static def getTrendingTopics() {
         List<TopicVO> topicVOS = []
         List list = Resource.createCriteria().list {
-            projections{
+            projections {
                 property('topic')
             }
-            count('topic','resCount')
+            count('topic', 'resCount')
             groupProperty('topic')
             order('resCount')
             maxResults 5
         }
-        list.each{
+        list.each {
             Topic topic = it[0]
             topicVOS.add(new TopicVO(id: topic.id, name: topic.name, visibility: topic.visibility,
-                    createdBy: topic.createdBy, count: it[1],subsCount:topic.subscription.size()))
+                    createdBy: topic.createdBy, count: it[1], subsCount: topic.subscription.size()))
         }
         topicVOS
     }

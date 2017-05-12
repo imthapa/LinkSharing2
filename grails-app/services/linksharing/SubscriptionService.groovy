@@ -7,10 +7,10 @@ import grails.transaction.Transactional
 class SubscriptionService {
 
     //subscription done for creator of topic
-    def subscribeCreator(Topic topic, String seriousness) {
+    def subscribeCreator(Topic topic, Seriousness seriousness) {
         def notSubscribed = Subscription.findByTopicAndUser(topic, topic.createdBy);
         if (notSubscribed == null) {
-            Subscription subscription = new Subscription(topic: topic, user: topic.createdBy, seriousness: Seriousness.toSeriousness(seriousness))
+            Subscription subscription = new Subscription(topic: topic, user: topic.createdBy, seriousness: seriousness)
 
 //            topic.addToSubscriptions(subscription)
             subscription.save()

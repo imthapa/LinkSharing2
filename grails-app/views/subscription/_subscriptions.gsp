@@ -1,7 +1,4 @@
-<div class="panel panel-default">
-    <div class="panel-heading">Subscriptions <a href="" class="pull-right">view All</a></div>
 
-    <div class="panel-body">
         <g:each in="${subscriptionList}" var="subscription">
             <div class="well">
                 <div class="row">
@@ -63,5 +60,3 @@
                 %{--<hr style="border: 1px solid ">--}%
             </div>
         </g:each>
-    </div>
-</div>

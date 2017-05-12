@@ -3,6 +3,7 @@ package linksharing
 import com.ttnd.linksharing.vo.PostsVO
 import com.ttnd.linksharing.co.ResourceSearchCO
 import com.ttnd.linksharing.vo.RatingInfoVO
+import com.ttnd.linksharing.vo.TopicVO
 
 abstract class Resource {
     String description;
@@ -70,7 +71,7 @@ abstract class Resource {
                 'resource' {
                     groupProperty('id')
                 }
-                count('id','count')
+                count('id', 'count')
                 order('count', 'desc')
             }
             maxResults 5
@@ -106,6 +107,30 @@ abstract class Resource {
            */
     }
 
+    static def getAllResources(Topic topic) {
+        List<PostsVO> allResources = []
+        List resources = Resource.createCriteria().list {
+            projections {
+                property('id')
+                property('description')
+                property('topic')
+            }
+            eq('topic', topic)
+        }
+        resources.each {
+           /* PostsVO p = new PostsVO()
+            p.resourceID = it[1] as long//resource.id
+            p.resourceDescription = it[1];
+            p.topicId = it[2].id
+            p.topicName = it[2].name*/
+            Topic topic1 = it[2]
+            allResources.add(new PostsVO(resourceID: it[0],
+                    resourceDescription: it[1],
+                    topicId: topic1.id,
+                    topicName: topic1.name))
+        }
+        allResources
+    }
 
     @Override
     public String toString() {

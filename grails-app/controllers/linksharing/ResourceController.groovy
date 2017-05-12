@@ -1,5 +1,6 @@
 package linksharing
 
+import com.ttnd.linksharing.co.LinkCO
 import com.ttnd.linksharing.co.ResourceSearchCO
 import com.ttnd.linksharing.vo.RatingInfoVO
 
@@ -16,6 +17,12 @@ class ResourceController {
     def delete(long id) {
         String result = resourceService.delete(id)
         render result
+    }
+
+    def save(LinkCO linkCo){
+        linkCo.createdBy = session.user
+        resourceService.createResource(linkCo)
+        redirect(controller: 'user', action: 'index')
     }
 
     //todo GORM2 - Q2b Add search action in a resource controller, which will search if q parameter is set and it will set visibility of resourcesearchco to public

@@ -2,8 +2,7 @@ package linksharing
 
 import com.ttnd.linksharing.co.SearchCO
 import com.ttnd.linksharing.vo.InboxVO
-import com.ttnd.linksharing.vo.ProfilePageVO
-import com.ttnd.linksharing.vo.SubscriptionVO
+import com.ttnd.linksharing.vo.UserDetailsVO
 import com.ttnd.linksharing.vo.TopicVO
 
 //todo Q3. Add User controller with index action that will render text 'user dahsboard'
@@ -13,36 +12,34 @@ class UserController {
 
     def index() {
         User user = session.user
-        ProfilePageVO profilePageVO = new ProfilePageVO()
-        profilePageVO.loggedInUsersFullName = user.getFullName()
-        profilePageVO.loggedInUsername = user.userName
-        profilePageVO.subscriptionCount = Subscription.countByUser(user)
-        profilePageVO.topicCount = Topic.countByCreatedBy(user)
+        UserDetailsVO userDetailsVO = new UserDetailsVO()
+        userDetailsVO.userFullName = user.getFullName()
+        userDetailsVO.userName = user.userName
+        userDetailsVO.subscriptionCount = Subscription.countByUser(user)
+        userDetailsVO.topicCount = Topic.countByCreatedBy(user)
 //        profilePageVO.photo = session.user.photo
-        profilePageVO.loggedInUserId = user.id
-
-        List<SubscriptionVO> subscriptionList = User.getSubscribedTopic(user)
-        log.info("${subscriptionList}")
+        userDetailsVO.userId = user.id
+        List<TopicVO> subscriptionList = User.getSubscribedTopic(user)
         List<InboxVO> messages = user.getUnReadResources()
-        render view: 'dashboard', model: [user: profilePageVO, subscriptionList: subscriptionList,messages:messages]
+        render view: 'dashboard', model: [users: userDetailsVO, subscriptionList: subscriptionList, messages: messages]
     }
 /*
     def index(SearchCO searchCO){
-//        render "${session.user}"
-//        render(view:"dashboard");
-//        log.info("${searchCO.q}")
-//        List list = User.getUnReadResources(searchCO)
-//        println(list)
-//        render(list)
-    }*/
-/*
+        render "${session.user}"
+        render(view:"dashboard");
+        log.info("${searchCO.q}")
+        List list = User.getUnReadResources(searchCO)
+        println(list)
+        render(list)
+    }
+*/
 
+/*
     def index(SearchCO searchCO) {
         log.info("wkwkwwkjwkjwk $searchCO.q")
         List list = User.getUnReadResources(searchCO)
         render "$list"
     }
-
 */
 
     def image(Long userId) {

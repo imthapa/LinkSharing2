@@ -93,7 +93,7 @@
 <g:layoutBody/>
 <g:render template="/resource/linkCreate" model="[resource: resource]"/>
 <g:render template="/resource/docResource" model="[resource: resource]"/>
-%{--<g:render template="createTopic" model="[topic: topic]"/>--}%
+<g:render template="/topic/create" model="[topic: topic]"/>
 
 <g:include controller="home" action="showMessage"/>
 <asset:javascript src="application.js"/>

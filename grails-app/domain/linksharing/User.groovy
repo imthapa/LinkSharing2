@@ -4,6 +4,7 @@ import com.ttnd.linksharing.co.SearchCO
 import com.ttnd.linksharing.dto.ResourceDTO
 import com.ttnd.linksharing.vo.InboxVO
 import com.ttnd.linksharing.vo.SubscriptionVO
+import com.ttnd.linksharing.vo.TopicVO
 import org.hibernate.sql.JoinType
 import org.hibernate.transform.Transformers
 
@@ -84,7 +85,7 @@ class User {
             maxResults 5
         }
         result.each {
-            InboxVOList.add(new InboxVO(topicName: it[0].name, createdBy: it[2],description: it[1]))
+            InboxVOList.add(new InboxVO(topicName: it[0].name, createdBy: it[2], description: it[1]))
         }
         println(InboxVOList)
         InboxVOList
@@ -96,8 +97,13 @@ class User {
         return "$userName"
     }
 
+    static def allCreatedTopics(User user){
+        List<Topic> list = Topic.findAllByCreatedBy(user)
+        list
+    }
+
     static def getSubscribedTopic(User user) {
-        List<SubscriptionVO> subscriptionVOList = []
+        List<TopicVO> subscriptions = []
         def subscriptionList = Subscription.createCriteria().list() {
             projections {
                 property('topic')
@@ -106,15 +112,13 @@ class User {
             eq('user', user)
 //            maxResults 5
         }
+
         subscriptionList.each {
             Topic topic = it[0]
-            subscriptionVOList.add(new SubscriptionVO(topicName: topic.name, createdBy: topic.createdBy,
-                    subsCount: topic.subscription.size(),
-                    resCount: topic.resource.size(), visibility: topic.visibility, seriousness: it[1]))
+            subscriptions.add(new TopicVO(id: topic.id, name: topic.name, visibility: topic.visibility,
+                    createdBy: topic.createdBy, count: topic.resource.size(), subsCount: topic.subscription.size()))
         }
-        println("$subscriptionVOList")
-        subscriptionVOList
+        return subscriptions
     }
-
 }
 

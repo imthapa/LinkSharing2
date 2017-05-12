@@ -4,7 +4,7 @@ package linksharing
 class SubscriptionInterceptor {
 
     SubscriptionInterceptor(){
-        match(action: 'save')
+//        match(action: 'save')
     }
 
     boolean before() {

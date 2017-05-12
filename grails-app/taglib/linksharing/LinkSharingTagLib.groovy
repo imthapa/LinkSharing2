@@ -8,6 +8,11 @@ class LinkSharingTagLib {
 
     def trendingTopic = { attr, body ->
         User
-        out << render(template: "/topic/trendingPost", model: [trending: Topic.getTrendingTopics()])
+        out << render(template: "/topic/show", model: [topics: Topic.getTrendingTopics()])
+    }
+
+    def topicSearched = { attr, body ->
+        User
+        out << render(template: "/topic/show", model: [topics: Topic.findAllBy()])
     }
 }
