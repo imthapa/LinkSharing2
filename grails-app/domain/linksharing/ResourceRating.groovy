@@ -2,11 +2,11 @@ package linksharing
 
 class ResourceRating {
     Integer score;
-    Resource resource;
+//    Resource resource;
     Date dateCreated
     Date lastUpdated
 
-   static belongsTo = [user:User]
+   static belongsTo = [user:User,resource:Resource]
 
     static constraints = {
         score(nullable: false,range: 1..5)

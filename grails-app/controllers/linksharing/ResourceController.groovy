@@ -5,43 +5,50 @@ import com.ttnd.linksharing.vo.RatingInfoVO
 
 class ResourceController {
 
-    def index() {}
+    def resourceService
+
+    def index() {
+//        "${Resource.topPost().each {render it[0]}}"
+//        render "${Resource.topPost()}"
+    }
 
     //todo Domain2 - Q3. Use read() for /topic/show and load() for /resource/delete & /topic/delete action.
-    def delete(Integer id) {
-        Resource resource = Resource.load(id)
-        Resource resource1 = resource
-        resource.delete()
-        render "$resource1 is successfully deleted"
+    def delete(long id) {
+        String result = resourceService.delete(id)
+        render result
     }
 
     //todo GORM2 - Q2b Add search action in a resource controller, which will search if q parameter is set and it will set visibility of resourcesearchco to public
-    def search(ResourceSearchCO resourceSearchCO){
+    def search(ResourceSearchCO resourceSearchCO) {
         resourceSearchCO.validate()
-            log.info("${resourceSearchCO.errors.allErrors}")
+        log.info("${resourceSearchCO.errors.allErrors}")
         render "unsuccessful"
-        if (resourceSearchCO.hasErrors()){
-        }
-        else{
+        if (resourceSearchCO.hasErrors()) {
+        } else {
             log.info("successfully done")
             render "successfully done"
         }
-
     }
 
     //TODO GORM2 Q3d) Call getRatingInfo method from resource show action
-    def show(Long id){
+    def show(Long id) {
         RatingInfoVO ratingInfoVO = Resource.getRatingInfo(id)
-        render"""
+        render """
                     totalVotes:${ratingInfoVO.totalVotes}
                     averageScore:${ratingInfoVO.averageScore}
                     totalScore:$ratingInfoVO.totalScore
                     """
-
     }
 
-    def updateReadItem(Long id,Boolean isRead){
-        String str = ReadingItem.changeIsRead(id,isRead)
+    def updateReadItem(Long id, Boolean isRead) {
+        String str = ReadingItem.changeIsRead(id, isRead)
         render "${str}"
+    }
+
+    def topPost(){
+        List list = Resource.topPost()
+//        render("${list}")
+        render(template:"/topic/posts" ,model:['postsList':list]);
+//        render "${Resource.topPost()}"
     }
 }

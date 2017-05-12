@@ -1,8 +1,8 @@
 package linksharing
 
+import com.ttnd.linksharing.vo.PostsVO
 import com.ttnd.linksharing.co.ResourceSearchCO
 import com.ttnd.linksharing.vo.RatingInfoVO
-import org.hibernate.sql.JoinType
 
 abstract class Resource {
     String description;
@@ -12,7 +12,7 @@ abstract class Resource {
     static belongsTo = [createdBy: User, topic: Topic]
     static hasMany = [ratings: ResourceRating, readingItems: ReadingItem]
 
-    // todo GORM-2  Q3.a)Create transient in resource ratingInfo and create method which will return RatingInfoVO
+    // todo GORM2 Q3a) Create transient in resource ratingInfo and create method which will return RatingInfoVO
     static transients = ['ratingInfo']
 
 
@@ -20,7 +20,6 @@ abstract class Resource {
         description(nullable: false, blank: false)
         createdBy(nullable: false)
         topic(nullable: false)
-
     }
 
     //todo GORM2 Q1c) Create named query 'search' which takes ResourceSearchCO as argument and find resources specific to topic id.
@@ -28,54 +27,83 @@ abstract class Resource {
     static namedQueries = {
         search {
             ResourceSearchCO rsCo ->
-                if (rsCo.topicId) {
-                    eq('topic', Topic.get(rsCo.topicId))
+                'topic' {
+                    if (rsCo.topicId) {
+                        eq('id', topicId)
+//                    eq('topic', topicId)   ???
+                    }
+                    if (rsCo.visibility) {
+                        eq('visibility', rsCo.visibility)
+                    }
                 }
-                if(rsCo.visibility){
-                    eq('visibility',rsCo.visibility)
-                }
+
         }
     }
 
-    //todo GORM2 3c) Write criteria query to get the above information
-    static def getRatingInfo(Long resourceId){
+    //todo GORM2 Q3c) Write criteria query to get the above information
+    static def getRatingInfo(Long resourceId) {
         List<Long> ratingInfoVO = ResourceRating.createCriteria().get {
-            projections{
+            projections {
                 count('score')
                 avg('score')
                 sum('score')
 
             }
 //            eq('user',this)
-            eq('resource',Resource.get(resourceId))
+            eq('resource', Resource.get(resourceId))
         }
-        new RatingInfoVO(totalVotes: ratingInfoVO[0],averageScore: ratingInfoVO[1],totalScore: ratingInfoVO[2])
+        new RatingInfoVO(totalVotes: ratingInfoVO[0], averageScore: ratingInfoVO[1], totalScore: ratingInfoVO[2])
 
     }
 
     /*
-    //todo 5. Add top post when user is not logged in
-        - Resource with maximum number of votes will be top post
+    //todo GORM2 Q5) Add top post when user is not logged in
+        -Resource with maximum number of votes will be top post
         -Only 5 posts should be shown in order of maximum vote count
         -Use groupProperty with id of resource otherwise lots of queries will be fired
         -Collect Resource list with resource id using getall rather then finder otherwise ordering will not be maintained
     */
-    static def topPost(){
-        List result = Resource.createCriteria().list {
-            projections{
-                property('id')
-                property('topic')
-                count('id')
-//                property('filepath')
-//                property('url')
+
+    static def topPost() {
+        def result = ResourceRating.createCriteria().list {
+            projections {
+                'resource' {
+                    groupProperty('id')
+                }
+                count('id','count')
+                order('count', 'desc')
             }
-            createAlias('ratings','ratings',JoinType.INNER_JOIN)
             maxResults 5
-            count('id','count')
-            groupProperty('id')
-            order('count','desc')
         }
-        result
+        ArrayList fResult = []
+        result.each {
+            PostsVO p = new PostsVO()
+            Resource resource = Resource.get(it[0])
+            p.resourceID = it[0] as long//resource.id
+            p.resourceDescription = resource.description;
+            p.topicId = resource.topicId
+            p.topicName = resource.topic.name
+            fResult.add(p)
+        }
+        println(fResult)
+        fResult
+
+        /*    List result = Resource.createCriteria().list {
+               projections{
+                   property('id')
+                   property('topic')
+   //                count('id')
+   //                property('filepath')
+   //                property('url')
+               }
+           //    createAlias('ratings','ratings',JoinType.INNER_JOIN)
+               count('id','count')
+               groupProperty('id')
+               order('count','desc')
+               maxResults 5
+           }
+           result
+           */
     }
 
 

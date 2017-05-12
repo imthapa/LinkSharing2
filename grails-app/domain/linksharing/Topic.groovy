@@ -5,6 +5,7 @@ import com.ttnd.linksharing.util.Visibility
 import com.ttnd.linksharing.vo.TopicVO
 import org.hibernate.criterion.CriteriaSpecification
 import org.hibernate.sql.JoinType
+import org.hibernate.transform.Transformers
 import org.hibernate.type.IntegerType
 
 
@@ -18,6 +19,7 @@ class Topic {
     static hasMany = [subscription: Subscription, resource: Resource]
     static belongsTo = [createdBy: User]
 
+    static transients = ['subscribedTopics', 'trendingTopics']
     //todo Domain2 - Q1. Add default sorting: - Topic domain should be default sorted by name asc
     static mapping = {
         //id composite: ['createdBy','name']
@@ -70,38 +72,106 @@ class Topic {
     - Maximum 5 records should be shown
     - Topic with maximum resource should come first
 **/
-    static def getTrendingTopics(){
-        List result = Topic.createCriteria().list {
-            projections{
-//               sqlProjection 'id as id ,name as name',['id','name'],[Integer,String]
-                property('id')// as IntegerType
-                property('name')// as String
-                property('visibility')// as String
-              //  count('res.id')
-                count('id','c')// as Integer
-                property('createdBy')// as String
-            }
-            eq('visibility',Visibility.PRIVATE)
-            createAlias('resource','res',JoinType.INNER_JOIN)
-            groupProperty('id')
-            count('id')
-            maxResults 5
-            order('c',"desc")
-            order('name')
-        }
-   /*     result.collect({
-          //  List brr = it.toString().tokenize("[")
-            List arr = it.toString().split(",")
-            println("thi is output ${arr.size()}")
-//           new TopicVO(id: arr[0].toString() as Integer,name: arr[1],visibility: Visibility.toVisibility(arr[2]),count: arr[3] as Integer,createdBy: arr[4])
-        })
-        result.collect({
-            println("thi is output ${it.class}")
-            new TopicVO(id: it[0],name: it[1],visibility: it[2],count: it[3],createdBy: it[4])
-        })*/
-      //  new TopicVO(id: result[0],name: result[1],visibility: result[2],count: result[3],createdBy: result[4])
-        result
-    }
+    /*   static def getTrendingTopics(){
+           List result = Topic.createCriteria().list {
+   //            resultTransform(Transformers.aliasToBean(TopicVO))
+               projections{
+                   property('id')
+                   property('name')
+                   property('visibility')
+                   count('id','count')
+                   property('createdBy')
+               }
+               eq('visibility',Visibility.PRIVATE)
+   //            createAlias('resource','res',JoinType.INNER_JOIN)
+               groupProperty('id')
+               count('id')
+               maxResults 5
+               order('count',"desc")
+               order('name')
+           }
 
+           List fList = []
+           result.each {
+               TopicVO topicVO = new TopicVO()
+               topicVO.id = it[0] //as long
+               topicVO.name = it[1] //as String
+               topicVO.visibility = it[2] //as String
+               topicVO.count = it[3] //as int
+   //            topicVO.createdBy = it[4] as User
+               fList.add(topicVO)
+           }
+      *//*     result.collect({
+             //  List brr = it.toString().tokenize("[")
+               List arr = it.toString().split(",")
+               println("thi is output ${arr.size()}")
+   //           new TopicVO(id: arr[0].toString() as Integer,name: arr[1],visibility: Visibility.toVisibility(arr[2]),count: arr[3] as Integer,createdBy: arr[4])
+           })
+           result.collect({
+               println("thi is output ${it.class}")
+               new TopicVO(id: it[0],name: it[1],visibility: it[2],count: it[3],createdBy: it[4])
+           })*//*
+         //  new TopicVO(id: result[0],name: result[1],visibility: result[2],count: result[3],createdBy: result[4])
+           println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh $result")
+           result
+       }
+   */
+    //todo Grails Views Q18) Create transient method getSubscribedUsers in topic domain to get all the subscribed users
+    def getSubscribedUsers(Topic topic) {
+        allSubscribedUsers = Subscription.createCriteria().list {
+            projections {
+                property('id')
+            }
+            'topic' {
+                eq('id', topic.id)
+            }
+        }
+
+        println(allSubscribedUsers)
+        allSubscribedUsers
+    }
+/*
+
+    static List<TopicVO> getTrendingTopics() {
+        List<TopicVO> trendingTopics = []
+        Resource.createCriteria().list {
+            createAlias('topic', 't')
+            projections {
+                groupProperty("t.id")
+                property("t.name")
+                property("t.visibility")
+                property("t.createdBy")
+                count("t.id", "topicCount")
+                count('t.subscription','subsCount')
+            }
+            order("topicCount", "desc")
+            order("t.name", "desc")
+            maxResults(5)
+        }.each {
+            trendingTopics.add(new TopicVO(id: it[0], name: it[1], visibility: it[2],
+                    createdBy: it[3], count: it[4],subsCount: it[5]))
+        }
+        return trendingTopics
+    }
+*/
+
+    static def getTrendingTopics(){
+        List<TopicVO> topicVOS = []
+        List list = Resource.createCriteria().list {
+            projections{
+                property('topic')
+            }
+            count('topic','resCount')
+            groupProperty('topic')
+            order('resCount')
+            maxResults 5
+        }
+        list.each{
+            Topic topic = it[0]
+            topicVOS.add(new TopicVO(id: topic.id, name: topic.name, visibility: topic.visibility,
+                    createdBy: topic.createdBy, count: it[1],subsCount:topic.subscription.size()))
+        }
+        topicVOS
+    }
 
 }

@@ -109,7 +109,7 @@ environments:
         dataSource:
           #  formatSql: true
           #  logSql: true
-            dbCreate: create-drop
+            dbCreate: update #create-drop
             url: jdbc:mysql://localhost:3306/linksharing
 #            url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
     test:

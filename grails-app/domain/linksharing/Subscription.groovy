@@ -26,4 +26,18 @@ class Subscription {
         topic lazy: false
         user lazy: false
     }
+
+
+    @Override
+    public String toString() {
+        return "Subscription{" +
+                "id=" + id +
+                ", version=" + version +
+                ", topic=" + topic +
+                ", user=" + user +
+                ", seriousness=" + seriousness +
+                ", dateCreated=" + dateCreated +
+                ", lastUpdated=" + lastUpdated +
+                '}';
+    }
 }

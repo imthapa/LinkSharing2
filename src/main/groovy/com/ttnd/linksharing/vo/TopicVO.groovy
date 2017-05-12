@@ -8,11 +8,12 @@ import linksharing.User
  */
 //todo GORM2 Q4b) TopicVO will have id,name,visibility,count,createdBy fields
 class TopicVO {
-    Integer id
+    long id
     String name
-    Visibility visibility
+    String visibility
     Integer count
     User createdBy
+    Integer subsCount
 
 
     @Override

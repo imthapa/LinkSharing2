@@ -11,11 +11,8 @@ class UserCO implements Validateable{
     String email;
     String userName
     String password;
-    boolean active;
+    String confirmPassword;
     byte[] photo;
-    boolean admin
-    Date dateCreated
-    Date lastUpdated
 
     static constraints = {
 
@@ -25,12 +22,18 @@ class UserCO implements Validateable{
         firstName(blank: false, nullable: false)
         lastName(blank: false, nullable: false)
         photo(nullable: true)
-        admin(nullable: true)
-        active(nullable: true)
     }
 
+
     @Override
-    String toString() {
-        return "$userName"
+    public String toString() {
+        return "UserCO{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", confirmPassword='" + confirmPassword + '\'' +
+                '}';
     }
 }

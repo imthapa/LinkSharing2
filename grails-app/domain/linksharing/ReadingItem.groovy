@@ -1,5 +1,7 @@
 package linksharing
 
+import com.ttnd.linksharing.co.SearchCO
+
 class ReadingItem {
     Boolean isRead
     Date dateCreated

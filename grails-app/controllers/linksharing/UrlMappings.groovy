@@ -12,7 +12,6 @@ class UrlMappings {
         //todo Q8) If user is not found then flash.error is set to 'User not found' and flash.error is rendered - Urlmapping is updated for / action to controller login action index
         "/"(controller:"login",action:"index")
         "500"(view: '/error')
-//        "500"(controller: "error")
         "404"(view: '/notFound')
     }
 }
