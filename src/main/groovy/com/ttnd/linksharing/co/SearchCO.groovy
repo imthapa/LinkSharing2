@@ -11,5 +11,18 @@ class SearchCO {
     Integer offset
     String order
     String sort
+    long id
 
+
+    @Override
+    public String toString() {
+        return "SearchCO{" +
+                "q='" + q + '\'' +
+                ", max=" + max +
+                ", offset=" + offset +
+                ", order='" + order + '\'' +
+                ", sort='" + sort + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }

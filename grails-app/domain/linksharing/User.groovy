@@ -1,12 +1,10 @@
 package linksharing
 
 import com.ttnd.linksharing.co.SearchCO
-import com.ttnd.linksharing.dto.ResourceDTO
 import com.ttnd.linksharing.vo.InboxVO
-import com.ttnd.linksharing.vo.SubscriptionVO
+import com.ttnd.linksharing.vo.PostsVO
 import com.ttnd.linksharing.vo.TopicVO
 import org.hibernate.sql.JoinType
-import org.hibernate.transform.Transformers
 
 class User {
     String firstName;
@@ -30,6 +28,8 @@ class User {
         subscription lazy: false
     }
     static transients = ['fullName', 'confirmPassword', 'subscribedTopics']
+
+
 
     String getFullName() {
         return "$firstName $lastName"
@@ -73,6 +73,7 @@ class User {
             projections {
 //                property('r.id')
                 property('r.topic')
+                property('r.id')
                 property('r.description')
                 property('r.createdBy')
             }
@@ -85,7 +86,7 @@ class User {
             maxResults 5
         }
         result.each {
-            InboxVOList.add(new InboxVO(topicName: it[0].name, createdBy: it[2], description: it[1]))
+            InboxVOList.add(new InboxVO(topicName: it[0].name, resourceID: it[1], createdBy: it[3], description: it[2]))
         }
         println(InboxVOList)
         InboxVOList
@@ -98,8 +99,27 @@ class User {
     }
 
     static def allCreatedTopics(User user){
+        List<TopicVO> topicsCreated =[]
         List<Topic> list = Topic.findAllByCreatedBy(user)
-        list
+        list.each {
+            Topic topic = it
+            topicsCreated.add(new TopicVO(id: topic.id, name: topic.name, visibility: topic.visibility,
+                    createdBy: topic.createdBy, count: topic.resource.size(), subsCount: topic.subscription.size()))
+
+        }
+
+        topicsCreated
+    }
+
+    static List<PostsVO> allCreatedPost(User user) {
+        List<PostsVO> allPosts = []
+        List<Resource> list = Resource.findAllByCreatedBy(user)
+        list.each {
+            Resource resource = it
+            allPosts.add(new PostsVO(resourceID: resource.id,resourceDescription: resource.description,
+                    topicId: resource.topicId,topicName: resource.topic.name))
+        }
+        allPosts
     }
 
     static def getSubscribedTopic(User user) {

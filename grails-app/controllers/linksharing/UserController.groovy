@@ -2,6 +2,7 @@ package linksharing
 
 import com.ttnd.linksharing.co.SearchCO
 import com.ttnd.linksharing.vo.InboxVO
+import com.ttnd.linksharing.vo.PostsVO
 import com.ttnd.linksharing.vo.UserDetailsVO
 import com.ttnd.linksharing.vo.TopicVO
 
@@ -61,6 +62,31 @@ class UserController {
         List list = session.user.getUnReadResources()
         println(list)
         render(list)
+    }
+
+    def profile(long id) {
+
+        User user = User.get(id)
+
+        UserDetailsVO userDetailsVO = new UserDetailsVO()
+        userDetailsVO.userFullName = user.getFullName()
+        userDetailsVO.userName = user.userName
+        userDetailsVO.subscriptionCount = Subscription.countByUser(user)
+        userDetailsVO.topicCount = Topic.countByCreatedBy(user)
+        userDetailsVO.userId = user.id
+
+        List<TopicVO> subscriptionList = User.getSubscribedTopic(user)
+        List<TopicVO> topicsCreated = User.allCreatedTopics(user)
+        List<PostsVO> allPosts = User.allCreatedPost(user)
+//        users: userDetailsVO,
+        render view: "profile", model: ['subscriptionList': subscriptionList,
+                                        topicsCreated: topicsCreated,allPosts:allPosts]
+    }
+
+    def edit(){
+
+        List<TopicVO> topicsCreated = User.allCreatedTopics(session.user)
+        render view: "edit",model: [topicsCreated: topicsCreated]
     }
 
 }

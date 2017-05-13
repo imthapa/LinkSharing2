@@ -2,6 +2,7 @@ package linksharing
 
 import com.ttnd.linksharing.co.LinkCO
 import com.ttnd.linksharing.co.ResourceSearchCO
+import com.ttnd.linksharing.vo.DetailedPostVO
 import com.ttnd.linksharing.vo.RatingInfoVO
 
 class ResourceController {
@@ -19,7 +20,7 @@ class ResourceController {
         render result
     }
 
-    def save(LinkCO linkCo){
+    def save(LinkCO linkCo) {
         linkCo.createdBy = session.user
         resourceService.createResource(linkCo)
         redirect(controller: 'user', action: 'index')
@@ -52,10 +53,15 @@ class ResourceController {
         render "${str}"
     }
 
-    def topPost(){
+    def topPost() {
         List list = Resource.topPost()
 //        render("${list}")
-        render(template:"/topic/posts" ,model:['postsList':list]);
+        render(template: "/topic/posts", model: ['postsList': list]);
 //        render "${Resource.topPost()}"
+    }
+
+    def viewPost(long id) {
+        DetailedPostVO detailedPostVO = Resource.getResourceDetails(id)
+        render view: "viewPost", model: [detailedPost: detailedPostVO]
     }
 }

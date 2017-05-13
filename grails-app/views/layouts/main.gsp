@@ -52,7 +52,8 @@
                     %{-- <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Tutorials
                          <span class="caret"></span></button>--}%
                     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Profile</a></li>
+                        %{--<li role="presentation"><a role="menuitem" tabindex="-1" href="/user/">Profile</a></li>--}%
+                        <li role="presentation"><g:link action="edit" controller="user" params='["id": "${session.user.id}"]'>Profile</g:link></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Users</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Topics</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Posts</a></li>

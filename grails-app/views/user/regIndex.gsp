@@ -10,7 +10,8 @@
         <div class="panel-heading">Posts</div>
 
         <div class="panel-body">
-            <g:render template="/topic/posts" model="[postsList: postsList]"/>
+            %{--<g:render template="/topic/posts" model="[postsList: postsList]"/>--}%
+            <ls:topPosts/>
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 package linksharing
 
+import com.ttnd.linksharing.vo.DetailedPostVO
 import com.ttnd.linksharing.vo.PostsVO
 import com.ttnd.linksharing.co.ResourceSearchCO
 import com.ttnd.linksharing.vo.RatingInfoVO
@@ -54,7 +55,6 @@ abstract class Resource {
             eq('resource', Resource.get(resourceId))
         }
         new RatingInfoVO(totalVotes: ratingInfoVO[0], averageScore: ratingInfoVO[1], totalScore: ratingInfoVO[2])
-
     }
 
     /*
@@ -118,11 +118,11 @@ abstract class Resource {
             eq('topic', topic)
         }
         resources.each {
-           /* PostsVO p = new PostsVO()
-            p.resourceID = it[1] as long//resource.id
-            p.resourceDescription = it[1];
-            p.topicId = it[2].id
-            p.topicName = it[2].name*/
+            /* PostsVO p = new PostsVO()
+             p.resourceID = it[1] as long//resource.id
+             p.resourceDescription = it[1];
+             p.topicId = it[2].id
+             p.topicName = it[2].name*/
             Topic topic1 = it[2]
             allResources.add(new PostsVO(resourceID: it[0],
                     resourceDescription: it[1],
@@ -138,5 +138,15 @@ abstract class Resource {
                 "id=" + id +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    static def getResourceDetails(long id) {
+        RatingInfoVO ratingInfoVO = getRatingInfo(id)
+        Resource resource = Resource.get(id)
+        DetailedPostVO detailedPostVO = new DetailedPostVO(resourceID: id, description: resource.description,
+                ratings: ratingInfoVO.averageScore, updated: resource.lastUpdated,
+                userName: resource.createdBy.userName, fullName: resource.createdBy.fullName,
+                topicName: resource.topic.name)
+        detailedPostVO
     }
 }

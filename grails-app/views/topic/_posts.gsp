@@ -1,8 +1,7 @@
 <g:each in="${postsList}" var="posts">
     <div class="well">
-        <div><a href="/">${posts.topicName}</a>
-
-
+        <div>%{--<a href="/">${posts.topicName}</a>--}%
+            <g:link action="show" controller="topic" params='["id": "${posts.topicId}"]'>${posts.topicName}</g:link>
         </div>
 
         <p>${posts.resourceDescription}</p>
@@ -20,7 +19,9 @@
                 <a href="#" class="operations" style="margin-right:10px">Delete</a>
                 <a href="#" class="operations" style="margin-right:10px">Edit</a>
                 <a href="#" class="operations" style="margin-right:10px">Download</a>
-                <a href="#" class="operations" style="margin-right:10px">View Full Site</a>
+                %{--<a href="#" class="operations" style="margin-right:10px">View Post</a>--}%
+                <g:link action="viewPost" controller="resource" params='["id": "${posts.resourceID}"]'><label>View post</label></g:link>
+
             </span>
         </div>
     </div>

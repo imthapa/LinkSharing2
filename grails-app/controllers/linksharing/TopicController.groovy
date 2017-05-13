@@ -1,8 +1,10 @@
 package linksharing
 
 import com.ttnd.linksharing.co.ResourceSearchCO
+import com.ttnd.linksharing.co.SearchCO
 import com.ttnd.linksharing.co.TopicCO
 import com.ttnd.linksharing.util.Visibility
+import com.ttnd.linksharing.vo.InboxVO
 import com.ttnd.linksharing.vo.PostsVO
 import com.ttnd.linksharing.vo.TopicVO
 import com.ttnd.linksharing.vo.UserDetailsVO
@@ -112,17 +114,15 @@ class TopicController {
         List topicVO = Topic.getTrendingTopics()
         log.info("$topicVO")
         render "$topicVO"
-        /* render """
-                     topicId : $TopicVO.id
-                     topicName : $TopicVO.name
-                     visibility ; $TopicVO.visibility
-                     count : $TopicVO.count
-                     createdBy : $TopicVO.createdBy
-                     """
-        */
     }
 
     def populate(){
         User.allCreatedTopics(session.user)
+    }
+
+    def search(SearchCO searchCO){
+        List<InboxVO> searchResult =  Topic.getSearched(searchCO)
+        log.info("$searchResult")
+        render(view: "search", model: ["totalResult":searchResult.size(),"searchResult":searchResult,'topics':new TopicVO(name:  searchCO.q)])
     }
 }

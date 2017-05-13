@@ -7,6 +7,7 @@ import linksharing.User
  */
 class InboxVO {
 
+    long resourceID
     String topicName
     String description
     User createdBy
@@ -17,9 +18,10 @@ class InboxVO {
     @Override
     public String toString() {
         return "InboxVO{" +
-                "topicName='" + topicName + '\'' +
+                "resourceID=" + resourceID +
+                ", topicName='" + topicName + '\'' +
                 ", description='" + description + '\'' +
-                ", createdBY=" + createdBy +
+                ", createdBy=" + createdBy +
                 '}';
     }
 }

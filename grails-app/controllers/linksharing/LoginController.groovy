@@ -43,7 +43,7 @@ class LoginController {
 
         } else {
             flash.error = "User not found"
-            render(view: "/user/regIndex", model: ['postsList': Resource.topPost()]);
+            render(view: "/user/regIndex")//, model: ['postsList': Resource.topPost()]);
             //todo Q8. If user is not found then flash.error is set to 'User not found' and flash.error is rendered - Urlmapping is updated for / action to controller login action index
 //            render "${flash.error}"
         }

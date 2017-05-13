@@ -1,14 +1,24 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>User Dashboard</title>
+    <title>User Profile</title>
 </head>
 
 <body>
 <div class="col-md-5">
     <div class="panel panel-default">
         <div class="panel-body">
-            <g:render template="show"/>
+            %{--<g:render template="show"/>--}%
+            <ls:loggedInUser/>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Topics</div>
+
+        <div class="panel-body">
+            %{--<ls:topicsCreated />--}%
+            <g:render template="/topic/show" model="[topics: topicsCreated]"/>
         </div>
     </div>
 
@@ -20,23 +30,16 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">Trending Topics</div>
-
-        <div class="panel-body">
-            <ls:trendingTopic/>
-        </div>
-    </div>
 </div>
 
 <div class="col-md-7">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Inbox
+            Posts
         </div>
 
         <div class="panel-body">
-            <g:render template="inbox"/>
+            <g:render template="/topic/posts" model="[postsList: allPosts]"/>
         </div>
     </div>
 </div>

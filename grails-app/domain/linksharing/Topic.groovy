@@ -1,14 +1,12 @@
 package linksharing
 
+import com.ttnd.linksharing.co.SearchCO
 import com.ttnd.linksharing.util.Seriousness
 import com.ttnd.linksharing.util.Visibility
+import com.ttnd.linksharing.vo.InboxVO
 import com.ttnd.linksharing.vo.TopicVO
 import com.ttnd.linksharing.vo.UserDetailsVO
-import org.hibernate.criterion.CriteriaSpecification
 import org.hibernate.sql.JoinType
-import org.hibernate.transform.Transformers
-import org.hibernate.type.IntegerType
-
 
 class Topic {
 
@@ -124,7 +122,7 @@ class Topic {
             projections {
                 property('user')
             }
-            eq('topic',topic)
+            eq('topic', topic)
         }
 
         println(allSubscribedUsers)
@@ -182,5 +180,31 @@ class Topic {
         }
         topicVOS
     }
+
+    static def getSearched(SearchCO searchCO) {
+        List<InboxVO> searchResult = []
+        List result = Topic.createCriteria().list() {
+            createAlias("resource", "r", JoinType.LEFT_OUTER_JOIN)
+            projections {
+                property('name')
+                property('r.id')
+                property('r.description')
+                property('r.createdBy')
+            }
+            if (searchCO && searchCO.q) {
+                or {
+                    ilike("name", "%${searchCO.q}%")
+                    ilike("r.description", "%${searchCO.q}%")
+                }
+            }
+//            maxResults 5
+        }
+        result.each {
+            searchResult.add(new InboxVO(topicName: it[0], resourceID: it[1], createdBy: it[3], description: it[2]))
+        }
+        println("akkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk $searchResult}")
+        searchResult
+    }
+
 
 }
