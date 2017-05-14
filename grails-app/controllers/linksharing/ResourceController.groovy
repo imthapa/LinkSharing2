@@ -1,9 +1,11 @@
 package linksharing
 
+import com.ttnd.linksharing.co.FileCO
 import com.ttnd.linksharing.co.LinkCO
 import com.ttnd.linksharing.co.ResourceSearchCO
 import com.ttnd.linksharing.vo.DetailedPostVO
 import com.ttnd.linksharing.vo.RatingInfoVO
+import org.springframework.web.multipart.MultipartFile
 
 class ResourceController {
 
@@ -56,12 +58,41 @@ class ResourceController {
     def topPost() {
         List list = Resource.topPost()
 //        render("${list}")
-        render(template: "/topic/posts", model: ['postsList': list]);
+        render(template: "/topic/posts", model: [resourceList: list]);
 //        render "${Resource.topPost()}"
     }
 
     def viewPost(long id) {
         DetailedPostVO detailedPostVO = Resource.getResourceDetails(id)
         render view: "viewPost", model: [detailedPost: detailedPostVO]
+    }
+
+    def upload(FileCO fileCO) {
+        MultipartFile file = fileCO.myFile
+        if (file.empty) {
+            flash.message = 'file cannot be empty'
+            render("error")
+            return
+        }
+
+        def rootDir = request.getSession().getServletContext().getRealPath("/")
+        //servletContext.getRealPath("/") //app directory
+        File fileDest = new File(rootDir, "/uploads/${file.originalFilename}")
+        file.transferTo(fileDest)
+        fileCO.createdBy = session.user
+        Resource resource = new DocumentResource(filePath: "${rootDir}/uploads/${file.originalFilename}",
+                description: fileCO.description, topic: Topic.get(fileCO.topicId), createdBy: fileCO.createdBy)
+        resource.save(flush: true, failOnError: true)
+        redirect controller: "user", action: "index"
+    }
+
+    def download(long id){
+        Resource resource = Resource.get(id)
+        log.info("$resource.filePath")
+        response.setHeader("Content-Disposition","attachment;filename=myfile")
+        byte[] myBytes = new File ("${resource.filePath}").bytes
+        response.setContentType("text/plain")
+        response.outputStream << myBytes
+
     }
 }

@@ -1,10 +1,22 @@
-<g:each in="${postsList}" var="posts">
+<g:each in="${resourceList}" var="resource">
     <div class="well">
-        <div>%{--<a href="/">${posts.topicName}</a>--}%
-            <g:link action="show" controller="topic" params='["id": "${posts.topicId}"]'>${posts.topicName}</g:link>
+        <div class="col-sm-2">
+            <!--<span class="glyphicon glyphicon-user "></span>-->
+            <!-- %{--<img src="../images/user_image.jpg"/>--}% -->
         </div>
 
-        <p>${posts.resourceDescription}</p>
+        <div class="col-sm-10 ">
+            <div class=" user_details">
+                <label>${resource.createdBy.fullName}</label>&nbsp;&nbsp;&nbsp;<label>@${resource.createdBy.userName}</label>
+                %{--<a href="#" class="pull-right">${resource.topicName}</a>--}%
+                <g:link action="show" class="pull-right" controller="topic"
+                        params='["id": "${resource.topicId}"]'>${resource.topicName}</g:link>
+            </div>
+
+            <div class="">
+                ${resource.resourceDescription}
+            </div>
+        </div>
 
         <div>
             <a href="https://www.facebook.com" style="margin-right:10px">
@@ -16,12 +28,13 @@
             <a href="mailto:bootsnipp@gmail.com" style="margin-right:10px">
                 <i id="social-em" class="fa fa-envelope-square fa-2x social glyphsize"></i></a>
             <span class="pull-right">
-                <a href="#" class="operations" style="margin-right:10px">Delete</a>
-                <a href="#" class="operations" style="margin-right:10px">Edit</a>
-                <a href="#" class="operations" style="margin-right:10px">Download</a>
-                %{--<a href="#" class="operations" style="margin-right:10px">View Post</a>--}%
-                <g:link action="viewPost" controller="resource" params='["id": "${posts.resourceID}"]'><label>View post</label></g:link>
-
+                <g:if test="${session.user}">
+                    <a href="#" class="operations" style="margin-right:10px">Download</a>
+                    <a href="#" class="operations" style="margin-right:10px">View Full Site</a>
+                    <span><ls:markAsRead resource="${resource}"/></span>
+                </g:if>
+                <g:link action="viewPost" controller="resource"
+                        params='["id": "${resource.resourceID}"]'><label>View post</label></g:link>
             </span>
         </div>
     </div>

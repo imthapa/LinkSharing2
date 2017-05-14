@@ -2,5 +2,9 @@ package linksharing
 
 class AdminController {
 
-    def index() { }
+    def index() {
+        List<User> userList = User.findAll()
+        render view: "dashboard", model: ["users": userList]
+    }
+
 }

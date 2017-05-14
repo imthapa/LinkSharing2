@@ -56,7 +56,9 @@
             <span class="pull-right">
                 <a href="#" class="operations">Delete</a>
                 <a href="#" class="operations">Edit</a>
-                <a href="#" class="operations">Download</a>
+                <g:link action="download" class="pull-right" controller="resource"
+                        params='["id": "${detailedPost.resourceID}"]'>Download</g:link>
+                %{--<a href="#" class="operations">Download</a>--}%
                 <a href="#" class="operations">View Full Site</a>
 
             </span>

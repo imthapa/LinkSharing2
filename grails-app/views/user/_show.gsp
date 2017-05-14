@@ -14,14 +14,15 @@
             <div>
                 <div class="col-md-5">
                     <div>subscription</div>
-
-                    <div>${user.subscriptionCount}</div>
+                    %{--<div>${user.subscriptionCount}</div>--}%
+                    <ls:topicSubscriptionCount user="${user}"/>
                 </div>
 
                 <div class="col-md-2">
                     <div>Topics</div>
 
-                    <div>${user.topicCount}</div>
+                    %{--<div>${user.topicCount}</div>--}%
+                    <div><ls:topicCount user="${user}"/></div>
                 </div>
             </div>
         </div>

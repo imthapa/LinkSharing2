@@ -39,7 +39,7 @@
         </div>
 
         <div class="panel-body">
-            <g:render template="/topic/posts" model="[postsList: allPosts]"/>
+            <g:render template="/topic/posts" model="[resourceList: allPosts]"/>
         </div>
     </div>
 </div>

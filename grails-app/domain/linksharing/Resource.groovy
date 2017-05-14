@@ -49,12 +49,14 @@ abstract class Resource {
                 count('score')
                 avg('score')
                 sum('score')
-
             }
 //            eq('user',this)
             eq('resource', Resource.get(resourceId))
         }
-        new RatingInfoVO(totalVotes: ratingInfoVO[0], averageScore: ratingInfoVO[1], totalScore: ratingInfoVO[2])
+        println(ratingInfoVO)
+        if (ratingInfoVO[0] != 0){
+            new RatingInfoVO(totalVotes: ratingInfoVO[0], averageScore: ratingInfoVO[1], totalScore: ratingInfoVO[2])
+        }
     }
 
     /*
@@ -84,27 +86,29 @@ abstract class Resource {
             p.resourceDescription = resource.description;
             p.topicId = resource.topicId
             p.topicName = resource.topic.name
+            p.createdBy = resource.createdBy
             fResult.add(p)
         }
         println(fResult)
         fResult
 
-        /*    List result = Resource.createCriteria().list {
-               projections{
-                   property('id')
-                   property('topic')
-   //                count('id')
-   //                property('filepath')
-   //                property('url')
-               }
-           //    createAlias('ratings','ratings',JoinType.INNER_JOIN)
-               count('id','count')
-               groupProperty('id')
-               order('count','desc')
-               maxResults 5
-           }
-           result
-           */
+    }
+
+    static def recentPost() {
+        List<PostsVO> recentPost = []
+        def recentPostList = Resource.createCriteria().list {
+//            projections {
+//                property('id')
+//            }
+            order('lastUpdated', 'desc')
+            maxResults 5
+        }
+        recentPostList.each {
+            Resource resource = it
+            recentPost.add(new PostsVO(resourceID: resource.id, resourceDescription: resource.description,
+                    topicId: resource.topicId, topicName: resource.topic.name, createdBy: resource.createdBy))
+        }
+        recentPost
     }
 
     static def getAllResources(Topic topic) {
@@ -114,6 +118,7 @@ abstract class Resource {
                 property('id')
                 property('description')
                 property('topic')
+                property('createdBy')
             }
             eq('topic', topic)
         }
@@ -127,10 +132,12 @@ abstract class Resource {
             allResources.add(new PostsVO(resourceID: it[0],
                     resourceDescription: it[1],
                     topicId: topic1.id,
-                    topicName: topic1.name))
+                    topicName: topic1.name,
+                    createdBy: it[3]))
         }
         allResources
     }
+
 
     @Override
     public String toString() {
@@ -143,6 +150,9 @@ abstract class Resource {
     static def getResourceDetails(long id) {
         RatingInfoVO ratingInfoVO = getRatingInfo(id)
         Resource resource = Resource.get(id)
+        if (ratingInfoVO == null) {
+            ratingInfoVO = new RatingInfoVO(averageScore: 0)
+        }
         DetailedPostVO detailedPostVO = new DetailedPostVO(resourceID: id, description: resource.description,
                 ratings: ratingInfoVO.averageScore, updated: resource.lastUpdated,
                 userName: resource.createdBy.userName, fullName: resource.createdBy.fullName,

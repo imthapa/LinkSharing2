@@ -1,5 +1,5 @@
-//LinkSharing.User.password = "1234qwerty"
-LinkSharing.User {
-    defaultPassword = "1234qwerty"
-    //constant2 = value2
+/**
+ * Created by ishwar on 13/5/17.
+ */
+class Config {
 }

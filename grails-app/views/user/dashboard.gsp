@@ -36,7 +36,7 @@
         </div>
 
         <div class="panel-body">
-            <g:render template="inbox"/>
+            <g:render template="/topic/posts" model="[resourceList: resourceList]"/>
         </div>
     </div>
 </div>

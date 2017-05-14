@@ -67,7 +67,7 @@ class User {
   */
 
     def getUnReadResources(SearchCO searchCO) {
-        List<InboxVO> InboxVOList = []
+        List<PostsVO> PostsVOList = []
         List result = ReadingItem.createCriteria().list {
             createAlias("resource", "r", JoinType.LEFT_OUTER_JOIN)
             projections {
@@ -86,10 +86,11 @@ class User {
             maxResults 5
         }
         result.each {
-            InboxVOList.add(new InboxVO(topicName: it[0].name, resourceID: it[1], createdBy: it[3], description: it[2]))
+            PostsVOList.add(new PostsVO(topicName: it[0].name, resourceID: it[1],
+                    createdBy: it[3], resourceDescription: it[2],topicId: it[0].id))
         }
-        println(InboxVOList)
-        InboxVOList
+        println(PostsVOList)
+        PostsVOList
     }
 
 
@@ -117,7 +118,7 @@ class User {
         list.each {
             Resource resource = it
             allPosts.add(new PostsVO(resourceID: resource.id,resourceDescription: resource.description,
-                    topicId: resource.topicId,topicName: resource.topic.name))
+                    topicId: resource.topicId,topicName: resource.topic.name,createdBy: resource.createdBy))
         }
         allPosts
     }

@@ -33,7 +33,7 @@
         </div>
 
         <div class="panel-body">
-            <g:render template="/user/inbox" model="[messages: searchResult]"/>
+            <g:render template="/topic/posts" model="[resourceList: searchResult]"/>
         </div>
         <g:if test="${totalResult > 5}">
             <div class="panel-footer text-justify">

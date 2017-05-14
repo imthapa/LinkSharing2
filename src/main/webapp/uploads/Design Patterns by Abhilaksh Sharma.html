@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html class="sl-root decks show  mz-applicationcache mz-history mz-localstorage mz-svg mz-opacity mz-rgba mz-backgroundsize mz-cssanimations mz-csstransforms mz-csstransforms3d mz-csstransitions mz-flexbox mz-flexboxlegacy mz-fullscreen loaded ua-linux ua-firefox has-visible-scrollbars reveal-is-ready fonts-are-ready" data-account=""><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Design Patterns by Abhilaksh Sharma</title>
+    <meta name="description" content="A presentation created with Slides.">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <meta property="og:title" content="Design Patterns by Abhilaksh Sharma">
+    <meta property="og:description" content="A presentation created with Slides.">
+    <meta property="og:site_name" content="Slides">
+    <meta property="og:image" content="https://s3.amazonaws.com/media-p.slid.es/thumbnails/ff4e4710c7f67560a5fb5565dc6d54ec/thumb.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://slides.com/sharma_abhilaksh/designpatterns">
+    <meta property="fb:app_id" content="146002942236376">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <link rel="manifest" href="http://slides.com/manifest.json">
+
+    <link href="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/css.css" rel="stylesheet" type="text/css" data-application-font="opensans">
+
+    <link href="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/slides-1df814f963530a8557bab503c81c1049.css" media="all" rel="stylesheet">
+    <link href="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/application-ef235c544c6ca402a7b9129e17d255e3.css" media="all" rel="stylesheet">
+    	<link href="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/deck-v2-09061b241ac30a27eca85bf4919d6694.css" media="all" rel="stylesheet">
+
+
+
+<style id="user-css-output" type="text/css"></style>
+
+    <meta content="authenticity_token" name="csrf-param">
+<meta content="OzzkQpBJwQ7MtONgc+psUS9XNdA3qxwRF7q/gkqPRyw=" name="csrf-token">
+    <script type="application/javascript" async="" defer="defer" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/track.js"></script><script type="text/javascript" async="" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/f7sH7NavrjjvuGxByaw.js"></script><script async="" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/analytics.js"></script><script type="text/javascript">
+  if( !/dnt=1/.test( window.location.search ) ) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-39670045-1', 'auto');
+    ga('send', 'pageview');
+
+  }
+</script>
+    <!--[if lt IE 9]>
+    <script src="//assets.slid.es/assets/html5shiv-b51d49ab0e89834a02ffce4a59905afb.js"></script>
+<![endif]-->
+    	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@Slides">
+	<meta name="twitter:title" content="Design Patterns">
+	<meta name="twitter:description" content="An interactive presentation created with Slides.">
+	<meta name="twitter:image" content="https://s3.amazonaws.com/media-p.slid.es/thumbnails/ff4e4710c7f67560a5fb5565dc6d54ec/thumb.jpg">
+
+  <style type="text/css"></style><link rel="stylesheet" href="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/montserrat.css"><style type="text/css" media="screen">.uv-icon{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;display:inline-block;cursor:pointer;position:relative;-moz-transition:all 300ms;-o-transition:all 300ms;-webkit-transition:all 300ms;transition:all 300ms;width:39px;height:39px;position:fixed;z-index:100002;opacity:0.8;-moz-transition:opacity 100ms;-o-transition:opacity 100ms;-webkit-transition:opacity 100ms;transition:opacity 100ms}.uv-icon.uv-bottom-right{bottom:10px;right:12px}.uv-icon.uv-top-right{top:10px;right:12px}.uv-icon.uv-bottom-left{bottom:10px;left:12px}.uv-icon.uv-top-left{top:10px;left:12px}.uv-icon.uv-is-selected{opacity:1}.uv-icon svg{width:39px;height:39px}.uv-popover{font-family:sans-serif;font-weight:100;font-size:13px;color:black;position:fixed;z-index:100001}.uv-popover-content{-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;background:white;position:relative;width:325px;height:325px;-moz-transition:background 200ms;-o-transition:background 200ms;-webkit-transition:background 200ms;transition:background 200ms}.uv-bottom .uv-popover-content{-moz-box-shadow:rgba(0,0,0,0.3) 0 -10px 60px,rgba(0,0,0,0.1) 0 0 20px;-webkit-box-shadow:rgba(0,0,0,0.3) 0 -10px 60px,rgba(0,0,0,0.1) 0 0 20px;box-shadow:rgba(0,0,0,0.3) 0 -10px 60px,rgba(0,0,0,0.1) 0 0 20px}.uv-top .uv-popover-content{-moz-box-shadow:rgba(0,0,0,0.3) 0 10px 60px,rgba(0,0,0,0.1) 0 0 20px;-webkit-box-shadow:rgba(0,0,0,0.3) 0 10px 60px,rgba(0,0,0,0.1) 0 0 20px;box-shadow:rgba(0,0,0,0.3) 0 10px 60px,rgba(0,0,0,0.1) 0 0 20px}.uv-left .uv-popover-content{-moz-box-shadow:rgba(0,0,0,0.3) 10px 0 60px,rgba(0,0,0,0.1) 0 0 20px;-webkit-box-shadow:rgba(0,0,0,0.3) 10px 0 60px,rgba(0,0,0,0.1) 0 0 20px;box-shadow:rgba(0,0,0,0.3) 10px 0 60px,rgba(0,0,0,0.1) 0 0 20px}.uv-right .uv-popover-content{-moz-box-shadow:rgba(0,0,0,0.3) -10px 0 60px,rgba(0,0,0,0.1) 0 0 20px;-webkit-box-shadow:rgba(0,0,0,0.3) -10px 0 60px,rgba(0,0,0,0.1) 0 0 20px;box-shadow:rgba(0,0,0,0.3) -10px 0 60px,rgba(0,0,0,0.1) 0 0 20px}.uv-ie8 .uv-popover-content{position:relative}.uv-ie8 .uv-popover-content .uv-popover-content-shadow{display:block;background:black;content:'';position:absolute;left:-15px;top:-15px;width:100%;height:100%;filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius=15,MakeShadow=true,ShadowOpacity=0.30);z-index:-1}.uv-popover-tail{border:9px solid transparent;width:0;z-index:10;position:absolute;-moz-transition:border-top-color 200ms;-o-transition:border-top-color 200ms;-webkit-transition:border-top-color 200ms;transition:border-top-color 200ms}.uv-top .uv-popover-tail{bottom:-20px;border-top:11px solid white}.uv-bottom .uv-popover-tail{top:-20px;border-bottom:11px solid white}.uv-left .uv-popover-tail{right:-20px;border-left:11px solid white}.uv-right .uv-popover-tail{left:-20px;border-right:11px solid white}.uv-popover-loading{background:white;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;position:absolute;width:100%;height:100%;left:0;top:0}.uv-popover-loading-text{position:absolute;top:50%;margin-top:-0.5em;width:100%;text-align:center}.uv-popover-iframe-container{height:100%}.uv-popover-iframe{-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;overflow:hidden}.uv-is-hidden{display:none}.uv-is-invisible{display:block !important;visibility:hidden !important}.uv-is-transitioning{display:block !important}.uv-no-transition{-moz-transition:none !important;-webkit-transition:none !important;-o-transition:color 0 ease-in !important;transition:none !important}.uv-fade{opacity:1;-moz-transition:opacity 200ms ease-out;-o-transition:opacity 200ms ease-out;-webkit-transition:opacity 200ms ease-out;transition:opacity 200ms ease-out}.uv-fade.uv-is-hidden{opacity:0}.uv-scale-top,.uv-scale-top-left,.uv-scale-top-right,.uv-scale-bottom,.uv-scale-bottom-left,.uv-scale-bottom-right,.uv-scale-right,.uv-scale-right-top,.uv-scale-right-bottom,.uv-scale-left,.uv-scale-left-top,.uv-scale-left-bottom,.uv-slide-top,.uv-slide-bottom,.uv-slide-left,.uv-slide-right{opacity:1;-moz-transition:all 80ms ease-out;-o-transition:all 80ms ease-out;-webkit-transition:all 80ms ease-out;transition:all 80ms ease-out}.uv-scale-top.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateY(-15%);-ms-transform:scale(0.8) translateY(-15%);-webkit-transform:scale(0.8) translateY(-15%);transform:scale(0.8) translateY(-15%)}.uv-scale-top-left.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateY(-15%) translateX(-10%);-ms-transform:scale(0.8) translateY(-15%) translateX(-10%);-webkit-transform:scale(0.8) translateY(-15%) translateX(-10%);transform:scale(0.8) translateY(-15%) translateX(-10%)}.uv-scale-top-right.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateY(-15%) translateX(10%);-ms-transform:scale(0.8) translateY(-15%) translateX(10%);-webkit-transform:scale(0.8) translateY(-15%) translateX(10%);transform:scale(0.8) translateY(-15%) translateX(10%)}.uv-scale-bottom.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateY(15%);-ms-transform:scale(0.8) translateY(15%);-webkit-transform:scale(0.8) translateY(15%);transform:scale(0.8) translateY(15%)}.uv-scale-bottom-left.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateY(15%) translateX(-10%);-ms-transform:scale(0.8) translateY(15%) translateX(-10%);-webkit-transform:scale(0.8) translateY(15%) translateX(-10%);transform:scale(0.8) translateY(15%) translateX(-10%)}.uv-scale-bottom-right.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateY(15%) translateX(10%);-ms-transform:scale(0.8) translateY(15%) translateX(10%);-webkit-transform:scale(0.8) translateY(15%) translateX(10%);transform:scale(0.8) translateY(15%) translateX(10%)}.uv-scale-right.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateX(15%);-ms-transform:scale(0.8) translateX(15%);-webkit-transform:scale(0.8) translateX(15%);transform:scale(0.8) translateX(15%)}.uv-scale-right-top.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateX(15%) translateY(-10%);-ms-transform:scale(0.8) translateX(15%) translateY(-10%);-webkit-transform:scale(0.8) translateX(15%) translateY(-10%);transform:scale(0.8) translateX(15%) translateY(-10%)}.uv-scale-right-bottom.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateX(15%) translateY(10%);-ms-transform:scale(0.8) translateX(15%) translateY(10%);-webkit-transform:scale(0.8) translateX(15%) translateY(10%);transform:scale(0.8) translateX(15%) translateY(10%)}.uv-scale-left.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateX(-15%);-ms-transform:scale(0.8) translateX(-15%);-webkit-transform:scale(0.8) translateX(-15%);transform:scale(0.8) translateX(-15%)}.uv-scale-left-top.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateX(-15%) translateY(-10%);-ms-transform:scale(0.8) translateX(-15%) translateY(-10%);-webkit-transform:scale(0.8) translateX(-15%) translateY(-10%);transform:scale(0.8) translateX(-15%) translateY(-10%)}.uv-scale-left-bottom.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateX(-15%) translateY(10%);-ms-transform:scale(0.8) translateX(-15%) translateY(10%);-webkit-transform:scale(0.8) translateX(-15%) translateY(10%);transform:scale(0.8) translateX(-15%) translateY(10%)}.uv-slide-top.uv-is-hidden{-moz-transform:translateY(-100%);-ms-transform:translateY(-100%);-webkit-transform:translateY(-100%);transform:translateY(-100%)}.uv-slide-bottom.uv-is-hidden{-moz-transform:translateY(100%);-ms-transform:translateY(100%);-webkit-transform:translateY(100%);transform:translateY(100%)}.uv-slide-left.uv-is-hidden{-moz-transform:translateX(-100%);-ms-transform:translateX(-100%);-webkit-transform:translateX(-100%);transform:translateX(-100%)}.uv-slide-right.uv-is-hidden{-moz-transform:translateX(100%);-ms-transform:translateX(100%);-webkit-transform:translateX(100%);transform:translateX(100%)}
+</style><style></style><script type="text/javascript" async="" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/embed.js"></script><link rel="prefetch" href="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/a_data/lounge.css"><link rel="prefetch" href="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/a_data/common.js"><link rel="prefetch" href="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/a_data/lounge.js"><link rel="prefetch" href="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/a_data/config.js"></head>
+  <body>
+    
+    <div id="container" class="container">
+      <header class="global-header show-on-scroll extra-wide show">
+  <div class="wrapper">
+    <h1 class="logo-animation open">
+      <a class="symbol" href="http://slides.com/">
+        <div class="box-1"></div>
+        <div class="box-2"></div>
+        <div class="box-3"></div>
+      </a>
+      <a class="word" href="http://slides.com/"></a>
+    </h1>
+    <ul class="nav nav-long">
+        <li class="nav-item" data-page-id="home/explore">
+          <a class="nav-item-anchor" href="http://slides.com/explore"><span class="nav-item-label">Explore</span></a>
+        </li>
+        <li class="nav-item" data-page-id="static/features">
+          <a class="nav-item-anchor" href="http://slides.com/features"><span class="nav-item-label">Features</span></a>
+        </li>
+        <li class="nav-item" data-page-id="static/pricing">
+          <a class="nav-item-anchor" href="http://slides.com/pricing"><span class="nav-item-label">Pricing</span></a>
+        </li>
+        <li class="nav-item-divider"></li>
+        <li class="nav-item" data-page-id="sessions/new">
+          <a class="nav-item-anchor" href="http://slides.com/users/sign_in"><span class="nav-item-label">Log in</span></a>
+        </li>
+        <li class="nav-item nav-item-highlighted nav-item-secondary" data-page-id="static/pricing">
+          <a class="nav-item-anchor" href="http://slides.com/pricing"><span class="nav-item-label">Sign up</span></a>
+        </li>
+    </ul>
+  </div>
+</header>
+
+      
+      <div id="main" class="main" role="main">
+        
+
+
+
+
+<div class="marquee">
+
+	<div class="reveal-frame">
+		<div class="reveal-viewport theme-font-montserrat theme-color-silver-green">
+			<div class="reveal slide ready" role="application" data-transition-speed="default" data-background-transition="slide">
+				<div class="slides" style="width: 960px; height: 700px; left: 50%; top: 50%; bottom: auto; right: auto; transform: translate(-50%, -50%) scale(0.749571);">
+					<section data-id="b9deecd0815d545516a687cd3228fde3" class="past" style="display: none;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 238px; height: auto;" data-block-id="4f5e30e787a525aa372a881ae69e7343"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text">
+<h1>Design Patterns</h1>
+
+<p>&nbsp;</p>
+</div></div></section><section data-id="eab24af8d237e0eb59466ac71d42b531" class="past" style="display: none;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 66px; height: auto;" data-block-id="ba3e09022a025005da170b8d376bbf87"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>Agenda</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 82px; top: 140px; height: auto;" data-block-id="feabebf9e312135ed33ca0fa84566671"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul>
+	<li>
+	<pre><span style="font-size:0.7em">What?</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em">Categorization</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em">Why?</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em">Discussion on some patterns</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em">How?</span></pre>
+	</li>
+</ul>
+</div></div></section><section class="stack past" data-id="9adf82476a2efc96396ab9ded8071e02" style="display: none;" data-previous-indexv="0" aria-hidden="true" hidden=""><section data-id="79e5f4924e06d093bd4208c37455cbf8" style="display: none;" class="" aria-hidden="true"><div class="sl-block" data-block-type="text" style="width: 806px; left: 81px; top: 253px; height: auto;" data-block-id="5b2b19059e7ec7a7c466037770313d7a"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>What?</h1>
+</div></div></section><section data-id="0273339697cd3437fa6b27ead7229865" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 71px; height: auto;" data-block-id="081aaa152b624f5eed71184e78b9cd5e"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>Problems faced while designing a software</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 187px; height: auto;" data-block-id="e9635042bd2ea4522aaa47296b6d62ef"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul>
+	<li class="fragment visible" data-fragment-index="0">
+	<pre><span style="font-size:0.7em">Designing object-oriented software is hard</span></pre>
+	</li>
+	<li class="fragment visible" data-fragment-index="1">
+	<pre><span style="font-size:0.7em">Designing reusable object-oriented soft-
+ware is even harder</span></pre>
+	</li>
+	<li class="fragment visible" data-fragment-index="2">
+	<pre><span style="font-size:0.7em">Documenting a design is the hardest</span></pre>
+	</li>
+</ul>
+</div></div></section><section data-id="b9ef622e4d75a1c07abfc8d64278589a" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 76px; top: 69px; height: auto;" data-block-id="c3c677cedf271ab3e9cdea35a1518cd5"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>What is a Design Pattern?</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 170px; height: auto;" data-block-id="1441fea355ef0db08fd24f3b076d9ff2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul>
+	<li class="fragment visible" data-fragment-index="0">
+	<pre><span style="font-size:0.7em">Well-proved solution<span style="text-align:justify"> for solving the specific problem/task</span></span></pre>
+	</li>
+	<li class="fragment visible" data-fragment-index="1">
+	<pre><span style="font-size:0.7em">Programming language independent strategies for solving the common object-oriented design problems</span></pre>
+	</li>
+	<li class="fragment visible" data-fragment-index="2">
+	<pre><span style="font-size:0.7em"><span style="text-align:justify">Represents an idea, not a particular implementation</span></span></pre>
+	</li>
+	<li class="fragment visible" data-fragment-index="3">
+	<pre><span style="font-size:0.7em">Descriptions of communicating objects and classes that are customised to solve a general design problem in a particular context.</span></pre>
+	</li>
+</ul>
+</div></div></section><section data-id="ed04b3452649017f35d80090cc8cf55e" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 76px; top: 69px; height: auto;" data-block-id="39f4eec24328b098b3187f983bc379e8"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3 style="color:rgb(17, 17, 17); text-align:center"><span style="text-align:justify">Four essential elements of a design patterns</span></h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 170px; height: auto;" data-block-id="ec432c2721f8e0137c4b19c5391aff74"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul>
+	<li class="fragment visible" style="text-align:justify" data-fragment-index="0">
+	<pre><span style="font-size:0.7em">​Name</span></pre>
+	</li>
+	<li class="fragment visible" style="text-align:justify" data-fragment-index="1">
+	<pre><span style="font-size:0.7em">Intent</span></pre>
+	</li>
+	<li class="fragment visible" style="text-align:justify" data-fragment-index="2">
+	<pre><span style="font-size:0.7em">Solution</span></pre>
+	</li>
+	<li class="fragment visible" style="text-align:justify" data-fragment-index="3">
+	<pre><span style="font-size:0.7em">Consequences</span></pre>
+	</li>
+</ul>
+</div></div></section></section><section class="stack past" data-id="8d06b68f62d44ab20aab139bc6ec37a4" style="display: none;" data-previous-indexv="0" aria-hidden="true" hidden=""><section data-id="fa0002bce9a6012c27ef0e6489ff218c" style="display: none;" class="" aria-hidden="true"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 266px; height: auto;" data-block-id="db72d83c5e194622985a12f993f9f3e7"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>Categorization</h1>
+</div></div></section><section data-id="c5561b5acb110af472670659fb17273e" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 90px; height: auto;" data-block-id="8646efce04788d779cd55da18371e57d"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>By Purpose</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 46px; top: 190px; height: auto;" data-block-id="29e31a1728006d8b1dd976e06f5cfa6e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul>
+	<li class="fragment visible" data-fragment-index="0">
+	<pre><span style="font-size:0.7em">Creational Patterns</span></pre>
+	</li>
+	<li class="fragment visible" data-fragment-index="1">
+	<pre><span style="font-size:0.7em">Structural Patterns</span></pre>
+	</li>
+	<li class="fragment visible" data-fragment-index="2">
+	<pre><span style="font-size:0.7em">Behavioral Patterns</span></pre>
+	</li>
+</ul>
+</div></div></section><section data-id="c9ad23233f1aca6f51241c3577ad1246" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 91px; height: auto;" data-block-id="0149520969914c4fdfc8816445309ef9"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>By Scope</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 190px; height: auto;" data-block-id="fe7e8725debd4388ad76cdfa7c67d9f4"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul>
+	<li class="fragment visible" data-fragment-index="0">
+	<pre><span style="font-size:0.7em">Class Patterns</span></pre>
+	</li>
+	<li class="fragment visible" data-fragment-index="1">
+	<pre><span style="font-size:0.7em">Object Patterns</span></pre>
+	</li>
+</ul>
+</div></div></section><section data-id="6b157cf1ead70d5b89a084b1c88196ec" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="image" style="width: 710px; height: 391px; left: 125px; top: 84.5px;" data-block-id="7414336cfcac447f4ca6e3c3bf0d995c"><div class="sl-block-content" style="z-index: 10;"><img style="" data-natural-width="581" data-natural-height="320" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/pattern_classes.JPG"></div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 515px; height: auto;" data-block-id="6dff7cb5533c334d91068edaeb08593f"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;">
+<h3>Classification of design patterns</h3>
+</div></div></section></section><section class="stack past" data-id="4aa39de0c1163cd8e967542a24f16b09" style="display: block;" data-previous-indexv="0" aria-hidden="true" hidden=""><section data-id="a2714224e47928ad6a49af071496540d" style="display: block;" class="" aria-hidden="true">
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 266px; height: auto;" data-block-id="95f8e882b982cccf2d0b3b5c632689f8"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11;">
+<h1>Why?</h1>
+</div></div></section><section data-id="1579c6c2e3b247234ec77779332808bd" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 70px; height: auto;" data-block-id="d6197113c3804281226c42586ad96969"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>Why Design Patterns?</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 60px; top: 210px; height: auto;" data-block-id="c3d21a15f0b3aa120855fde62b965475"><div class="sl-block-content fragment visible" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;" data-fragment-index="0">
+<h1><span style="font-size:1.0em">Because Someone has already solved your problem!!</span></h1>
+</div></div></section><section data-id="516ef7e6c845f5278a3a03c403811722" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 76px; top: 69px; height: auto;" data-block-id="50512e945a1782f89b05a7f66d5e1dbb"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>Why Design Patterns?</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 140px; height: auto;" data-block-id="4ca7d28f2457365fffc8afaae1142d81"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul>
+	<li class="fragment visible" data-fragment-index="0">
+	<pre><span style="font-size:0.7em"><span style="text-align:start">Provide you with a way to solve issues related to software development using a proven solution.</span></span></pre>
+	</li>
+	<li class="fragment visible" data-fragment-index="1">
+	<pre><span style="font-size:0.7em"><span style="text-align:start">Make communication between designers / developers more efficient.</span></span></pre>
+	</li>
+	<li class="fragment visible" data-fragment-index="2">
+	<pre><span style="font-size:0.7em">Are language neutral and so can be applied to any language that supports object-orientation.</span></pre>
+	</li>
+	<li class="fragment visible" data-fragment-index="3">
+	<pre><span style="font-size:0.7em"><span style="text-align:start">Capture expert knowledge and design trade-offs and make expertise widely available.</span></span></pre>
+	</li>
+</ul>
+</div></div></section></section><section class="stack past" data-id="e70cc79f07cd6db5f7313f41150f5a2c" style="display: block;" data-previous-indexv="0" aria-hidden="true" hidden=""><section data-id="c02c7b4a410de590987969dfb06affbc" style="display: block;" class="" aria-hidden="true"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 266px; height: auto;" data-block-id="43b9e1066d2ef8c059e4f0c364730fe5"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>Strategy Pattern</h1>
+</div></div></section><section data-id="5a2522c1d8dc502a0ead56bf30d29c3c" class="future" style="display: block;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 91px; height: auto;" data-block-id="ab3f4f559491b0bf89060f5c9eccdfb6"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;">
+<h3>Intent</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 172px; height: auto;" data-block-id="4c33fbe71ea4d5fa7f5811f91f467b92"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;">
+<ul>
+	<li>
+	<pre style="text-align:left"><span style="font-size:0.7em">Have multiple algorithm for a specific task and client decides the actual implementation to be used at runtime.
+</span></pre>
+	</li>
+	<li>
+	<pre style="color:rgb(17, 17, 17)"><span style="font-size:0.7em">Lets the algorithms vary independently from clients that use it.</span></pre>
+	</li>
+	<li style="color:rgb(17, 17, 17)">
+	<pre><span style="font-size:0.7em">Design is open for future extension.</span></pre>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="1d7bf5383ff4ddb07f21d2689231ec46" style="min-width: 30px; min-height: 30px; width: 360px; height: 114px; left: 520px; top: 490px;"><div class="sl-block-content fragment visible" style="z-index: 13;" data-fragment-index="0"><img style="" data-natural-width="296" data-natural-height="94" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/principle1.png"></div></div></section><section data-id="3a73a815916a8beff17705fbc27bea67" class="future" style="display: none;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 90px; height: auto;" data-block-id="929b590c16b4066e8d5be2f22ca1386f"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;">
+<h3>Structure Diagram</h3>
+</div></div>
+<div class="sl-block" data-block-type="image" style="width: 710px; height: 328px; left: 125px; top: 193px;" data-block-id="bb77d016345850cd7e1bec545ba351c1"><div class="sl-block-content" style="z-index: 12;"><img style="" data-natural-width="508" data-natural-height="235" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/strategy.png"></div></div>
+<div class="sl-block intro-start" data-block-type="image" data-block-id="569bb22502273cb0c61139115603690a" style="min-width: 30px; min-height: 30px; width: 360px; height: 300px; left: 300px; top: 200px;"><div class="sl-block-content" style="z-index: 13;"></div></div></section><section data-id="9dd606e16a3b20ccab76ded8756ccb6c" class="future" style="display: none;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 71px; height: auto;" data-block-id="77f45a154d04c292b1381cb48fea9ffc"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3 style="text-align: left;">Participants</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 268px; height: auto;" data-block-id="9e2014382b2badf75c0a1e454d8932a5"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul>
+	<li>
+	<pre><span style="font-size:0.7em"><strong>Strategy</strong>
+​Declares an interface common to all supported algorithms. Context uses this interface to call the algorithm defined by a ConcreteStrategy.</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em"><strong>Concrete Strategy</strong>
+Implements the algorithm using the Strategy interface.
+</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em"><strong>Context</strong>
+maintains a reference to a Strategy object to make a call to the algorithm</span>
+</pre>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="image" style="width: 510px; height: 236px; left: 400px; top: 70px;" data-block-id="b63bab43add3040adac603b5d705c496"><div class="sl-block-content" style="z-index: 12;"><img data-natural-width="508" data-natural-height="235" style="" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/strategy.png"></div></div></section><section data-id="6db9e70a57948a386e8826867e0f7103" class="future" style="display: none;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 91px; height: auto;" data-block-id="1dd514e64ab316d9143f60b4a4192ad1"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;">
+<h3 style="text-align: left;">Collaborations</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 339px; height: auto;" data-block-id="d8a4eac95f4e61b9a7bba9cf3ef03f13"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;">
+<ul>
+	<li>
+	<pre><span style="font-size:0.7em">Strategy and Context interact to implement the chosen algorithm.</span></pre>
+	</li>
+	<li class="">
+	<pre><span style="font-size:0.7em">Clients usually create and pass a ConcreteStrategy object to the context; thereafter, clients interact with the context exclusively.
+</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em">There is often a family of ConcreteStrategy classes for a client to choose from.</span></pre>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="298e7cc7ed4cee814a05ab4984c417c5" style="min-width: 30px; min-height: 30px; width: 514px; height: 238px; left: 400px; top: 91px;"><div class="sl-block-content" style="z-index: 13;"><img data-natural-width="508" data-natural-height="235" style="" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/strategy.png"></div></div>
+<div class="sl-block" data-block-type="image" data-block-id="477181aed38a30b76bef8a506db42090" style="min-width: 30px; min-height: 30px; width: 319px; height: 89px; left: 1px; top: 141px;"><div class="sl-block-style" style="z-index: 14;"><div class="sl-block-content fragment visible" style="z-index: 14;" data-fragment-index="0"><img data-natural-width="290" data-natural-height="81" style="" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/principle2.png"></div></div></div>
+<div class="sl-block" data-block-type="image" data-block-id="de3a38cdc48eb5f38536c7be9d3b7ac6" style="min-width: 30px; min-height: 30px; width: 321px; height: 89px; left: 1px; top: 250px;"><div class="sl-block-content fragment visible" style="z-index: 15;" data-fragment-index="1"><img style="" data-natural-width="292" data-natural-height="81" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/principle3.png"></div></div></section><section data-id="7d7a6a787aed6986d9843fd3ebd65668" class="future" style="display: none;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 91px; height: auto;" data-block-id="ce0621adfd1a2e8a55e6a2fb1a657ddf"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>Use When</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 175px; height: auto;" data-block-id="7999e895b0044134e32b279c48912225"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" dir="ui"><ul>
+<span style="font-size:0.7em"></span><li><pre><span style="font-size:0.7em;">The only difference between many related classes is their behavior.</span></pre></li>
+<li><pre><span style="font-size:0.7em;">Multiple versions or variations of an algorithm are required.</span></pre></li>
+<li><pre><span style="font-size:0.7em;">Algorithms access or utilize data that calling code shouldn't be exposed to.</span></pre></li>
+<li><pre><span style="font-size:0.7em;">The behavior of a class should be defined at runtime.</span></pre></li>
+<span style="font-size:0.7em"></span>
+</ul></div></div></section><section data-id="b231fb91be54477f88de7645d16c23f5" class="future" style="display: none;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 91px; height: auto;" data-block-id="ac2796120446392118644ba64723d605"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>Considerations</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 175px; height: auto;" data-block-id="fd189ddc885c073ac0c0f7106007a4a9"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" dir="ui">
+<ul>
+	<li class="fragment visible" data-fragment-index="0">
+	<pre><span style="font-size:0.7em">Families of related algorithms</span></pre>
+	</li>
+	<li class="fragment visible" data-fragment-index="1">
+	<pre><span style="font-size:21px">An alternative to subclassing</span></pre>
+	</li>
+	<li class="fragment visible" data-fragment-index="2">
+	<pre><span style="font-size:0.7em">Eliminate conditional statements</span></pre>
+	</li>
+	<li class="fragment visible" data-fragment-index="3">
+	<pre><span style="font-size:0.7em">Provide different implementations of the same behavior</span></pre>
+	</li>
+	<li class="fragment visible" data-fragment-index="4">
+	<pre><span style="font-size:0.7em">Clients must be aware of different Strategies</span></pre>
+	</li>
+	<li class="fragment visible" data-fragment-index="5"><span style="font-size:0.7em">Communication overhead between Strategy and Context</span></li>
+	<li class="fragment visible" data-fragment-index="6"><span style="font-size:0.7em">Increased number of objects</span></li>
+</ul>
+</div></div></section><section data-id="c556237b991ddecdbb8f6daf1acdcca4" class="future" style="display: none;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 266px; height: auto;" data-block-id="ca5d570b154b74ba25668f76c729e812"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>Questions</h1>
+</div></div></section></section><section class="stack present" data-id="26752c6733e1a75860d527b3dd38a0b4" style="display: block;" data-previous-indexv="1"><section data-id="cc01568a810370f747d4722a46f76733" style="display: block;" class="past" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 266px; height: auto;" data-block-id="d5022499b7a2f9832219ac63c5cf8414"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>Observer Pattern</h1>
+</div></div></section><section data-id="2a9cfa9364338dd4e4ddb11cee60bc54" class="past" style="display: block;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 91px; height: auto;" data-block-id="7c2d10fd1237e87035520c859609c828"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>Intent</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 172px; height: auto;" data-block-id="06744861601a752b45f68a85298ca121"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul>
+	<li>
+	<pre style="text-align:left"><span style="font-size:21px">Defines a one-to-many relationship between a set of objects, where <strong>many</strong> objects are dependent on <strong>one</strong> object.</span>
+</pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em">When state of one object changes, all of its </span><span style="font-size:21px">dependants</span><span style="font-size:0.7em"> are notified and/or updated automatically.</span></pre>
+	</li>
+</ul>
+</div></div></section><section data-id="5cedac4c9dff55091ef578ee6df616c6" class="present" style="display: block;"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 90px; height: auto;" data-block-id="7e277c3d4a1f0e354e99141ed3dafd40"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;">
+<h3>Structure Diagram</h3>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="40a9aefe40fd7c8713fbfa6ccdb9972b" style="min-width: 30px; min-height: 30px; width: 671px; height: 353px; left: 145px; top: 188px;"><div class="sl-block-content" style="z-index: 12;"><img style="" data-natural-width="508" data-natural-height="267" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/Observer.png"></div></div></section><section data-id="8d1b98a5979d7aad5a604f9a30e5a815" class="future" style="display: block;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 71px; height: auto;" data-block-id="ac46ed20ea23f98542bf3def518dfbe0"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;">
+<h3 style="text-align: left;">Participants</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 223px; height: auto;" data-block-id="6eb285238d4c8291c65bae6757d3b41f"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" dir="ui">
+<ul>
+	<li>
+	<pre><span style="font-size:0.7em"><strong>Subject
+​</strong>- Knows its observers.
+- Any number of Observer objects may observe a subject.
+- Provides an interface for attaching and detaching Observer
+  objects.</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em"><strong>Observer</strong>
+- Defines an updating interface for objects that should be
+&nbsp; notified of changes
+  in a subject.</span></pre>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="14cbd78df37dc58b87a4c501eb542a89" style="min-width: 30px; min-height: 30px; width: 428px; height: 225px; left: 481px; top: 70px;"><div class="sl-block-content" style="z-index: 13;"><img data-natural-width="508" data-natural-height="267" style="" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/Observer.png"></div></div></section><section data-id="da555c2e838e6fcc504b19bb7df2fe8d" class="future" style="display: block;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 71px; height: auto;" data-block-id="dd8a3ca976976cb52cd7cddcaddd34c4"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;">
+<h3 style="text-align:left">Participants</h3>
+
+<h3 style="text-align:left">(Cont..)</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 854px; left: 55px; top: 240px; height: auto;" data-block-id="56023317218e624ae2ff84f3f9771931"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" dir="ui">
+<ul>
+	<li>
+	<pre><span style="font-size:0.7em"><strong>ConcreteSubject
+​</strong>- Stores state of interest to ConcreteObserver objects.</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em"><strong>ConcreteObserver</strong>
+- Maintains a reference to a ConcreteSubject object.
+- Stores state that should stay consistent with the 
+&nbsp; subject's.
+- Implements the Observer updating interface to keep its
+&nbsp; state consistent with the subject's.</span></pre>
+	</li>
+</ul>
+
+<p>&nbsp;</p>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="6406e52c249085ea10f41e9cef82cba4" style="min-width: 30px; min-height: 30px; width: 429px; height: 225px; left: 480px; top: 70px;"><div class="sl-block-content" style="z-index: 13;"><img data-natural-width="508" data-natural-height="267" style="" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/Observer.png"></div></div></section><section data-id="5ebdb36c4185361865ef9518f75e8a6a" class="future" style="display: none;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 71px; height: auto;" data-block-id="9b802b2eba7a50f4888b812765e3d23f"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3 style="color:rgb(17, 17, 17); text-align:left">Collaborations</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 854px; left: 55px; top: 279px; height: auto;" data-block-id="e5baa58b4331863edf75f971d5925de5"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" dir="ui">
+<ul>
+	<li>
+	<pre><span style="font-size:0.7em">ConcreteSubject notifies its observers whenever a change occurs.</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em">A ConcreteObserver object may query the subject for information.
+</span></pre>
+	</li>
+	<li><span style="font-size:21px">If the relationship between subject(s)
+ and observers becomes complex, then it is better to introduce a 
+Change-Manager which takes care of notify and update operations.</span></li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="image" style="min-width: 30px; min-height: 30px; width: 429px; height: 225px; left: 480px; top: 70px;" data-block-id="92642d625f5b9ed3fad5891a0334846d"><div class="sl-block-content" style="z-index: 13;"><img data-natural-width="508" data-natural-height="267" style="" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/Observer.png"></div></div></section><section data-id="187c9fb87205fd9a59889e763bec9227" class="future" style="display: none;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 91px; height: auto;" data-block-id="c8a73c705b326d3fb6621dc4871af3a0"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;">
+<h3>Use When</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 175px; height: auto;" data-block-id="60e5562f9ea54c770b01e46a20e33c73"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" dir="ui">
+<ul>
+	<li>
+	<pre><span style="font-size:0.7em">State changes in one or more objects should trigger behavior in other objects.</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em">Broadcasting capabilities are required.</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:21px">There is need to add </span><span style="font-size:0.7em">observers without modifying the subject or other observers.</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em">Loose coupling is required, so that related classes can be reused independently of each other.</span></pre>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="c8ac13a29f927fe46e21a6d3d6a186b8" style="min-width: 30px; min-height: 30px; width: 360px; height: 100px; left: 523px; top: 530px;"><div class="sl-block-content fragment" style="z-index: 13;" data-fragment-index="0"><img data-natural-width="293" data-natural-height="81" style="" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/principle4.png"></div></div></section><section data-id="e9bbd023c977f19be5013257498b29d1" class="future" style="display: none;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 91px; height: auto;" data-block-id="c2fee2985d7c7a57d7f8ed3a9ba046de"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>Considerations</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 170px; height: auto;" data-block-id="b78b3e52071b8797537999b83c407dd4"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" dir="ui">
+<ul>
+	<li class="fragment" data-fragment-index="0">
+	<pre><span style="font-size:0.7em">Unexpected updates</span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="1"><span style="font-size:0.7em">Mapping subjects to their observers</span></li>
+	<li class="fragment" data-fragment-index="2"><span style="font-size:0.7em">Observing more than one subject</span></li>
+	<li class="fragment" data-fragment-index="3"><span style="font-size:0.7em">Who triggers the update?</span></li>
+	<li class="fragment" data-fragment-index="4"><span style="font-size:0.7em">Dangling references to deleted subjects</span></li>
+	<li class="fragment" data-fragment-index="5"><span style="font-size:0.7em">The push and pull models</span></li>
+	<li class="fragment" data-fragment-index="6"><span style="font-size:0.7em">Encapsulating complex update semantics</span></li>
+</ul>
+</div></div></section><section data-id="0cb93f8fda7bab64300b142b40416b2a" class="future" style="display: none;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 266px; height: auto;" data-block-id="c0018cabf41008182f72304c0bbb82de"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>Questions</h1>
+</div></div></section></section><section class="stack future" data-id="4a31157d4f7d03b4cc60f4b551b341f8" style="display: block;" data-previous-indexv="0" aria-hidden="true" hidden=""><section data-id="e04c6c2699405b0403aa556ff4bb3dc3" style="display: block;" class="" aria-hidden="true"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 266px; height: auto;" data-block-id="282220a59acb30ada6ffb6bae31f36d5"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>Decorator Pattern</h1>
+</div></div></section><section data-id="33696f6418fae3f0d4b3d9c1e926ee08" class="future" aria-hidden="true" style="display: block;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 91px; height: auto;" data-block-id="905740515a6c540927ffe2567b09b67f"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;">
+<h3>Intent</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 174px; height: auto;" data-block-id="8b9a3282c70c4614bb86d18aad239acb"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;">
+<ul>
+	<li>
+	<pre style="text-align:left"><span style="font-size:0.7em">Attach additional responsibilities to an object <strong>dynamically</strong>.
+</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em">Decorators provide a flexible alternative to subclassing for extending functionality.</span></pre>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="9f96a2a7e901a8645410199293aa4379" style="min-width: 30px; min-height: 30px; width: 360px; height: 117px; left: 524px; top: 465px;"><div class="sl-block-content fragment" style="z-index: 13;" data-fragment-index="0"><img style="" data-natural-width="400" data-natural-height="130" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/principle5.png"></div></div></section><section data-id="77f68cac525b04006ef5f2b547808b50" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 90px; height: auto;" data-block-id="19ca8d53ce0fca19ac9dabcf47fe853a"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;">
+<h3>Structure Diagram</h3>
+</div></div>
+
+<div class="sl-block" data-block-type="image" data-block-id="776c0913f0d60872b4ef963ba93f31dd" style="min-width: 30px; min-height: 30px; width: 360px; height: 300px; left: 300px; top: 200px;"><div class="sl-block-content" style="z-index: 13;"><img style="visibility: hidden;" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/decorator.png"></div></div>
+<div class="sl-block" data-block-type="image" data-block-id="09cec38071d08fb4874ff5203f4c52e8" style="min-width: 30px; min-height: 30px; width: 597px; height: 291px; left: 145px; top: 189px;"><div class="sl-block-content" style="z-index: 14;"><img data-natural-width="480" data-natural-height="234" style="" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/decorator.png"></div></div></section><section data-id="6775973c846817cb8c0906dca731fcc9" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 15px; top: 71px; height: auto;" data-block-id="4b9ea128161b70ce00a480ad38e46259"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;">
+<h3 style="text-align: left;">Participants</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 960px; left: 0px; top: 223px; height: auto;" data-block-id="b43d593c449a0897d61800191321e2d9"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" dir="ui">
+<ul>
+	<li>
+	<pre><span style="font-size:0.7em"><strong>Component
+​</strong>- Defines the interface for objects that can have responsibilities added
+  to them dynamically</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em"><strong>ConcreteComponent</strong>
+- Defines an object to which additional responsibilities can be attached</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em"><strong>Decorator</strong>
+- Maintains a reference to a Component object
+- Defines an interface that conforms to Component's interface.</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em"><strong>ConcreteDecorator</strong>
+- Adds responsibilities to the component.</span></pre>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="303f852f71d87e52715358969c364cfa" style="min-width: 30px; min-height: 30px; width: 429px; height: 209px; left: 481px; top: 71px;"><div class="sl-block-content" style="z-index: 14;"><img data-natural-width="480" data-natural-height="234" style="" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/decorator.png"></div></div></section><section data-id="4807a23594afe9d46049dfa0372b4731" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 71px; height: auto;" data-block-id="5b3858aa79d2872b0609adfcd6af697d"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;">
+<h3 style="text-align:left">Collaborations</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 307px; height: auto;" data-block-id="3857de79d3c1231dd51dea201cfb92d9"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" dir="ui">
+<ul>
+	<li>
+	<pre><span style="font-size:0.7em">Decorator forwards requests to its Component object.</span></pre>
+	</li>
+	<li>
+	<pre style="color: rgb(17, 17, 17);"><span style="font-size:0.7em">The decorator adds its own behaviour either before and/or after delegating to the object it decorates to do the rest of the job.</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em">A decorator can itself be treated as a component and wrapped by another decorator.</span></pre>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="67ad402bce302e0505742ffe14b89640" style="min-width: 30px; min-height: 30px; width: 429px; height: 209px; left: 481px; top: 71px;"><div class="sl-block-content" style="z-index: 14;"><img data-natural-width="480" data-natural-height="234" style="" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/decorator.png"></div></div></section><section data-id="35405526c88f9dfc283057f4de6e2b20" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 91px; height: auto;" data-block-id="ce32b18f89f4c945c2703da3c4406d5b"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>Use When</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 74px; top: 175px; height: auto;" data-block-id="953718dab6cd84ffeb47feb2c88a8dea"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" dir="ui">
+<ul>
+	<li>
+	<pre><span style="font-size:0.7em">Object responsibilities and behaviours should be dynamically added, without affecting other objects.</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em">Responsibilities can be withdrawn</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em">Subclassing to achieve modification is impractical or impossible.</span></pre>
+	</li>
+</ul>
+</div></div></section><section data-id="d52f44589d229921e5543f4230044b16" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 91px; height: auto;" data-block-id="5c9728383fbde288dd206c896b9f5e96"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>Considerations</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 175px; height: auto;" data-block-id="a86a159af10904dd23224c8e7481fc3e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" dir="ui">
+<ul>
+	<li class="fragment" data-fragment-index="0">
+	<pre><span style="font-size:0.7em">Provides more flexibility than static inheritance.</span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="1">
+	<pre><span style="font-size:0.7em">Specific functionality does not reside high in the object hierarchy. </span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="2">
+	<pre><span style="font-size:0.7em">Keep Component classes lightweight.</span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="3">
+	<pre><span style="font-size:0.7em">If you have code that relies on the concrete component’s type, decorators will break that code.</span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="4">
+	<pre style="color: rgb(17, 17, 17);"><span style="font-size:0.7em">Lots of little objects.</span></pre>
+	</li>
+</ul>
+</div></div></section><section data-id="5d7e61c8acb64fad7bc4ba640e5f8eb8" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 266px; height: auto;" data-block-id="47e4af6b915da191b96aa8ca4788cf8c"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>Questions</h1>
+</div></div></section></section><section class="stack future" data-id="6bf9e5196d10591cfb739c92a65f699d" style="display: block;" data-previous-indexv="0" aria-hidden="true" hidden=""><section data-id="92cdc4e16f1f6d69385d659714691abb" style="display: block;" class="" aria-hidden="true"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 266px; height: auto;" data-block-id="cf7b5f0a1b5d4ba34694d5a4af38ef47"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>Singleton Pattern</h1>
+</div></div></section><section data-id="a6c1479df0820b61bf05bb9f50620468" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 91px; height: auto;" data-block-id="1f3cd25e7a407b1332a85fefb344b5cb"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>Intent</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 174px; height: auto;" data-block-id="41e9ee271225b6949db790bcbcdc6404"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul>
+	<li>
+	<pre style="text-align:left"><span style="font-size:0.7em">Ensure a class only has one instance, and provide a global point of access to it.</span></pre>
+	</li>
+</ul>
+</div></div>
+</section><section data-id="18ed17a30d7a70a7155066b7a7f601fd" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 90px; height: auto;" data-block-id="076baec6d5dd915a5ec40576c795c674"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;">
+<h3>Structure Diagram</h3>
+</div></div>
+
+<div class="sl-block" data-block-type="image" style="width: 360px; height: 300px; left: 300px; top: 200px;" data-block-id="7ee4bba62d543de2fa04318200e97677"><div class="sl-block-content" style="z-index: 12;"><img style="visibility: hidden;" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/decorator.png"></div></div>
+<div class="sl-block" data-block-type="image" data-block-id="334194b3b6856ccb060df6af720b0f14" style="min-width: 30px; min-height: 30px; width: 560px; height: 175px; left: 207px; top: 210px;"><div class="sl-block-content" style="z-index: 14;"><img style="" data-natural-width="502" data-natural-height="157" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/singleton.png"></div></div></section><section data-id="4c8f5a027df35ff214d2bc092c96b433" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 15px; top: 71px; height: auto;" data-block-id="7eb8350ec81a1794a73d5b1c06a616a5"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;">
+<h3 style="text-align: left;">Participants</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 800px; left: 80px; top: 211px; height: auto;" data-block-id="5e6ac3ce262c3727272977136f64d7c1"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" dir="ui">
+<ul>
+	<li>
+	<pre><span style="font-size:0.7em"><strong>Singleton
+​</strong>- Defines an Instance operation that lets clients access
+&nbsp; its unique instance.
+- Is responsible for creating its own unique instance</span></pre>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="2143b3f1a9222dbeb34748ff654ed4bc" style="min-width: 30px; min-height: 30px; width: 429px; height: 134px; left: 481px; top: 71px;"><div class="sl-block-content" style="z-index: 14;"><img data-natural-width="502" data-natural-height="157" style="" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/singleton.png"></div></div></section><section data-id="80ff0f4286ffb5f3b227faf7053e0059" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 15px; top: 71px; height: auto;" data-block-id="d4407b2d4f5c9defd533d53f44253848"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3 style="text-align:left">Collaborations</h3>
+</div></div>
+
+<div class="sl-block" data-block-type="image" style="width: 429px; height: 134px; left: 481px; top: 71px;" data-block-id="b96276941b8c7aec5bf026b142c7b647"><div class="sl-block-content" style="z-index: 12;"><img data-natural-width="502" data-natural-height="157" style="" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/singleton.png"></div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 233px; height: auto;" data-block-id="e907e9c2656a9658da601e59e2bc3bc7"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" dir="ui">
+<ul>
+	<li>
+	<pre><span style="font-size:0.7em">Clients access a Singleton instance solely through Singleton's Instance operation.</span></pre>
+	</li>
+</ul>
+</div></div></section><section data-id="db932027608020e27380eac116207787" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 91px; height: auto;" data-block-id="57658aab391bcdadbdb1be1d08dd607e"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>Use When</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 74px; top: 175px; height: auto;" data-block-id="2e14d4c9551658e8e6a407e08b9125fe"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" dir="ui">
+<ul>
+	<li>
+	<pre><span style="font-size:0.7em">Exactly one instance of a class is required.</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em">Single instance is accessible to clients from a global access.</span></pre>
+	</li>
+</ul>
+</div></div></section><section data-id="a2c0e322e0997d8100c65bc06a8f321c" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 91px; height: auto;" data-block-id="7fb55a9f12e703b480c2e0a5cd275028"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;">
+<h3>Considerations</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 175px; height: auto;" data-block-id="a2687deec65f8356bb1f2b9da17013a8"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" dir="ui">
+<ul>
+	<li class="fragment" data-fragment-index="0">
+	<pre><span style="font-size:0.7em">Controlled access to sole instance.</span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="1">
+	<pre><span style="font-size:0.7em">Permits refinement of operations and representation.</span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="2">
+	<pre><span style="font-size:0.7em">Permits a variable number of instances.</span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="3">
+	<pre><span style="font-size:0.7em">More flexible than class operations.</span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="4">
+	<pre><span style="font-size:0.7em">Ensuring single instance in multi-threaded context.</span></pre>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="a3856c58721a761c7000a74444b8c98c" style="min-width: 30px; min-height: 30px; width: 360px; height: 207px; left: 524px; top: 420px;"><div class="sl-block-content fragment" style="z-index: 13;" data-fragment-index="5"><img style="" data-natural-width="377" data-natural-height="217" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/singleton-doubleCheckedLocking.png"></div></div></section><section data-id="8900535393dcc838b9dc6bb2efb31abc" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 266px; height: auto;" data-block-id="82a1cd5c89cbef1622691b9ec86dae4c"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>Questions</h1>
+</div></div></section></section><section class="stack future" data-id="a0092d95928dd220fb8201ba039a6703" style="display: none;" data-previous-indexv="1" aria-hidden="true" hidden=""><section data-id="17fc6a23c4dedfebc38e10b83feeb30c" style="display: none;" class="past" aria-hidden="true" hidden="">
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 74px; top: 266px; height: auto;" data-block-id="213281e5b4cf3b954261e490e69f2716"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 13;">
+<h1 style="color:rgb(17, 17, 17)">How?</h1>
+</div></div></section><section data-id="8ec3593644d86d4313e30305d44ea053" class="" style="display: none;" aria-hidden="true"><div class="sl-block" data-block-type="text" style="width: 806px; left: 76px; top: 69px; height: auto;" data-block-id="2ce370915efe25746dcb6504a408addd"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>How to select a Design Pattern?</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 79px; top: 170px; height: auto;" data-block-id="c8dd9bafea52aa15af19298928c5c73b"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul>
+	<li class="fragment" data-fragment-index="0">
+	<pre><span style="font-size:21px">Consider which desing problem does the patterns solve</span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="1">
+	<pre><span style="font-size:0.7em">Relate your problem with design pattern's intent</span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="2">
+	<pre><span style="font-size:21px">Identify relationships between design patterns</span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="3"><span style="font-size:21px">Go through multiple patterns of like purpose</span></li>
+	<li class="fragment" data-fragment-index="4"><span style="font-size:21px">Examine the cause of redesign</span></li>
+	<li class="fragment" data-fragment-index="5"><span style="font-size:21px">Consider what should be variable in your design</span></li>
+</ul>
+</div></div></section><section data-id="96a41f4e68e1ef382f7c434e85f2c955" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 76px; top: 69px; height: auto;" data-block-id="e2e5563a1bbdc29b628c0eea2c605a56"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>How to use a Design Pattern?</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 78px; top: 172px; height: auto;" data-block-id="02711b049ab2123a68c3dc29a3e4aa75"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul>
+	<li class="fragment" data-fragment-index="0">
+	<pre><span style="font-size:0.7em">Read the pattern once through for an overview</span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="1">
+	<pre><span style="font-size:0.7em">Study the Structure, Participants, and Collaborations</span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="2">
+	<pre><span style="font-size:0.7em">Look at the Sample Code to see a concrete example of the pattern</span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="3">
+	<pre><span style="font-size:0.7em">Choose names for pattern participants that are meaningful in the application context</span></pre>
+	</li>
+</ul>
+</div></div></section><section data-id="7fd6e8955ba62904a6c1b0827c24d8ef" class="future" aria-hidden="true" style="display: none;" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 76px; top: 69px; height: auto;" data-block-id="98c8a503b3640a071fe0648da3dad769"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>How to use a Design Pattern? (Cont..)</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 80px; top: 170px; height: auto;" data-block-id="83ada03dd5f0795bf9b5cd9a6c0a19f0"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" dir="ui">
+<ul>
+	<li class="fragment" data-fragment-index="0">
+	<pre><span style="font-size:0.7em">Define the classes and their relationships</span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="1">
+	<pre><span style="font-size:0.7em">Define application-specific names for operations in the pattern</span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="2">
+	<pre><span style="font-size:0.7em">Implement the operations to carry out the responsibilities and collaborations</span></pre>
+	</li>
+	<li class="fragment" data-fragment-index="3">
+	<pre><span style="font-size:0.7em">Design patterns should not be applied blindly</span></pre>
+	</li>
+</ul>
+</div></div></section></section><section data-id="b0935b7977a780127dfe9bc2f7559490" class="future" style="display: none;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 266px; height: auto;" data-block-id="24535de7213624e4f09c337072cdd8df"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>Questions</h1>
+</div></div></section><section data-id="0eb3095c0c943e96c1ae5226167425e7" class="future" style="display: none;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 71px; height: auto;" data-block-id="3d9768809cc608439849542ad9fc2b27"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h3>References</h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 89px; top: 156px; height: auto;" data-block-id="b7b5c0686c4d42dc4422fea7eca291aa"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul>
+	<li>
+	<pre><span style="font-size:0.7em">Design Patterns - Elements of Reusable Object-Oriented Software (Gang Of Four)</span></pre>
+	</li>
+	<li>
+	<pre><span style="font-size:0.7em">Head First Design Patterns</span></pre>
+	</li>
+	<li><span style="font-size:0.7em">www.journaldev.com</span></li>
+	<li><span style="font-size:0.7em">www.dzone.com</span></li>
+</ul>
+</div></div></section><section data-id="876394ba2b46fed1d5bf86960ddc4f1d" class="future" style="display: none;" aria-hidden="true" hidden=""><div class="sl-block" data-block-type="text" style="width: 806px; left: 74px; top: 430px; height: auto;" data-block-id="3bbedefde7d60865a46a1c25071d1135"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;">
+<h1>Thanks</h1>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 95px; top: 140px; height: auto;" data-block-id="b81b79136d3279f357aa2cff3b24c623"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Subtitle" style="z-index: 11;">
+<h3>Design Patterns don't go directly into your code, they first go into your BRAIN.</h3>
+</div></div></section>
+				</div>
+			<div class="backgrounds"><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background stack past" style="display: none;" data-loaded="true"><div class="slide-background present" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;"></div></div><div class="slide-background stack past" style="display: none;" data-loaded="true"><div class="slide-background present" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;"></div></div><div class="slide-background stack past" style="display: block;" data-loaded="true"><div class="slide-background present" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div></div><div class="slide-background stack past" style="display: block;" data-loaded="true"><div class="slide-background present" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div></div><div class="slide-background stack present" style="display: block;" data-loaded="true"><div class="slide-background past" style="display: block;" data-loaded="true"></div><div class="slide-background past" style="display: block;" data-loaded="true"></div><div class="slide-background present" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div></div><div class="slide-background stack future" style="display: block;" data-loaded="true"><div class="slide-background present" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div></div><div class="slide-background stack future" style="display: block;" data-loaded="true"><div class="slide-background present" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div></div><div class="slide-background stack future" style="display: none;" data-loaded="true"><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background present" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div></div><div class="progress" style="display: block;"><span style="width: 574.558px;"></span></div><aside class="controls" style="display: block;"><button class="navigate-left enabled" aria-label="previous slide"></button><button class="navigate-right enabled" aria-label="next slide"></button><button class="navigate-up enabled" aria-label="above slide"></button><button class="navigate-down enabled" aria-label="below slide"></button></aside><div class="slide-number" style="display: block;"><span class="slide-number-a">7</span><span class="slide-number-delimiter">.</span><span class="slide-number-b">3</span></div><div class="speaker-notes" data-prevent-swipe="" tabindex="0"></div><div class="pause-overlay"></div><div style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);" id="aria-status-div" aria-live="polite" aria-atomic="true">
+Structure Diagram
+
+</div></div>
+		</div>
+	</div>
+
+	<div class="deck-kudos" style="opacity: 1;">
+		<button class="kudos-button kudos-trigger" data-kudos-id="927696" data-kudoed-by-user="false">
+			<div class="kudos-heart">
+				<span class="kudos-icon icon i-heart-fill"></span>
+			</div>
+			<div class="kudos-count" data-kudos-value="0" data-kudos-id="927696"></div>
+		</button>
+	</div>
+
+	<div class="pill summary-pill" style="left: 541px;">
+		<div class="pill-picture" style="background-image: url(https://www.gravatar.com/avatar/def2b789e3ca8a648de73801c73cd0d3?s=140&amp;d=https%3A%2F%2Fs3.amazonaws.com%2Fstatic.slid.es%2Fimages%2Fdefault-profile-picture.png)"></div>
+		<div class="pill-content">
+			<h4 class="pill-title">Design Patterns</h4>
+			<p class="pill-description">By Abhilaksh Sharma</p>
+		</div>
+	</div>
+
+	<div class="pill instructions-pill" style="left: 578.5px;">
+		<div class="pill-picture"></div>
+		<div class="pill-content">
+			<h4 class="pill-title"></h4>
+			<p class="pill-description"></p>
+		</div>
+	</div>
+
+</div>
+
+<div class="column">
+	<header class="deck-info extra-wide">
+		<div class="deck-social">
+			<a href="http://www.facebook.com/sharer.php?s=100&amp;p[title]=Design%20Patterns%20by%20Abhilaksh%20Sharma&amp;p[summary]=A%20presentation%20created%20with%20Slides.&amp;p[url]=http://slides.com/sharma_abhilaksh/designpatterns&amp;p[images][0]=https://s3.amazonaws.com/media-p.slid.es/thumbnails/ff4e4710c7f67560a5fb5565dc6d54ec/thumb.jpg" class="deck-social-button facebook-share-button" data-tooltip="Share on Facebook">
+				<span class="icon i-facebook"></span>
+			</a>
+			<a href="http://twitter.com/share?text=Design%20Patterns%20by%20Abhilaksh%20Sharma&amp;url=http%3A%2F%2Fslides.com%2Fsharma_abhilaksh%2Fdesignpatterns&amp;via=slides" class="deck-social-button twitter-share-button" data-tooltip="Share on Twitter">
+				<span class="icon i-twitter"></span>
+			</a>
+			<a href="https://plus.google.com/share?url=http%3A%2F%2Fslides.com%2Fsharma_abhilaksh%2Fdesignpatterns" class="deck-social-button google-share-button" data-tooltip="Share on Google+">
+			</a>
+		</div>
+
+		<div class="deck-promotion">
+			<a class="button cta" href="http://slides.com/pricing?ref=caplt">Create a presentation like this <span class="logo"></span></a>
+		</div>
+
+
+		<div class="deck-options">
+			<a class="fullscreen-button" data-tooltip="Fullscreen" href="#"><span class="icon i-fullscreen"></span></a>
+			<a class="comment-button" data-tooltip="Comments" data-scroll-to="" href="#comments" data-scroll-to-offset="-90"><span class="icon i-comment-stroke"></span></a>
+			<a class="share-button" data-tooltip="Share" href="#"><span class="icon i-share"></span></a>
+		</div>
+
+		<div class="clear"></div>
+
+		<div class="details">
+			<div class="deck-info">
+				<h3 class="title">Design Patterns</h3>
+				<ul class="deck-meta">
+					<li data-tooltip="Published date" data-tooltip-delay="500">
+						<span class="icon i-clock"></span>
+						<time class="value ago" datetime="2017-03-04 04:40:55 UTC">a month ago</time>
+					</li>
+					<li data-tooltip="Kudos" data-tooltip-delay="500">
+						<span class="icon i-heart-fill"></span>
+						<span class="value" data-kudos-value="0" data-kudos-id="927696"></span>
+					</li>
+					<li data-tooltip="Views" data-tooltip-delay="500">
+						<span class="icon i-eye"></span>
+						<span class="value">7</span>
+					</li>
+				</ul>
+			</div>
+
+			<div class="user-info">
+	<div class="picture" style="background-image: url(https://www.gravatar.com/avatar/def2b789e3ca8a648de73801c73cd0d3?s=140&amp;d=https%3A%2F%2Fs3.amazonaws.com%2Fstatic.slid.es%2Fimages%2Fdefault-profile-picture.png)"></div>
+	<div class="text">
+		<h3 class="title">
+			<a href="http://slides.com/sharma_abhilaksh" class="username">Abhilaksh Sharma</a>
+		</h3>
+		<p class="description"></p>
+		<ul class="links">
+			
+			
+		</ul>
+	</div>
+	<div class="clear"></div>
+</div>
+
+			<div class="clear"></div>
+		</div>
+	</header>
+
+	<section class="comments" id="comments">
+		<div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" scrolling="no" tabindex="0" title="Disqus" style="width: 1px ! important; min-width: 100% ! important; border: medium none ! important; overflow: hidden ! important; height: 336px ! important;" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/a.html" horizontalscrolling="no" verticalscrolling="no" width="100%" frameborder="0"></iframe></div>
+	</section>
+
+
+</div>
+
+      </div>
+      <footer class="global-footer">
+    <div class="link-group">
+      <h5>Product</h5>
+      <a href="http://slides.com/">Home</a>
+      <a href="http://slides.com/explore">Explore</a>
+      <a href="http://slides.com/features">Features</a>
+      <a href="http://slides.com/pricing">Pricing</a>
+      <a href="http://slides.com/developers">Developers</a>
+    </div>
+
+    <div class="link-group">
+      <h5>Help</h5>
+      <a href="http://help.slides.com/" target="_blank">Forum</a>
+      <a href="http://help.slides.com/knowledgebase" target="_blank">Knowledge Base</a>
+      <a href="http://help.slides.com/" data-feedback-mode="smartvote">Leave Feedback</a>
+      <a href="http://help.slides.com/" data-feedback-mode="contact">Report an Issue</a>
+    </div>
+
+    <div class="link-group">
+      <h5>Community</h5>
+      <a href="http://blog.slides.com/" target="_blank">Blog</a>
+      <a href="http://twitter.com/slides" target="_blank">Twitter</a>
+      <a href="http://facebook.com/slidesapp" target="_blank">Facebook</a>
+      <a href="http://plus.google.com/+slidesapp/" rel="publisher" target="_blank">Google+</a>
+    </div>
+
+    <div class="link-group">
+      <h5>Company</h5>
+      <a href="http://slides.com/about">About Slides</a>
+      <a href="http://slides.com/changelog">What's New</a>
+      <a href="http://slides.com/terms">Terms of Service</a>
+      <a href="http://slides.com/privacy">Privacy Policy</a>
+    </div>
+
+    <div class="copyright"><span>© 2017 Slides, Inc.</span></div>
+</footer>
+
+    </div> <!--! end of #container -->
+    <script>
+UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/f7sH7NavrjjvuGxByaw.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+
+UserVoice.push(['set', {
+  accent_color: '#448dd6',
+  trigger_color: 'white',
+  trigger_background_color: 'rgba(46, 49, 51, 0.6)',
+  position: 'automatic'
+}]);
+
+</script>
+    
+<script>
+	var SLConfig = {"deck":{"id":927696,"slug":"designpatterns","title":"Design Patterns","description":"","width":960,"height":700,"visibility":"all","published_at":"2017-03-04T04:40:55.465Z","sanitize_messages":null,"thumbnail_url":"https://s3.amazonaws.com/media-p.slid.es/thumbnails/ff4e4710c7f67560a5fb5565dc6d54ec/thumb.jpg","view_count":7,"user":{"id":663190,"username":"sharma_abhilaksh","name":"Abhilaksh Sharma","description":"","thumbnail_url":"https://www.gravatar.com/avatar/def2b789e3ca8a648de73801c73cd0d3?s=140\u0026d=https%3A%2F%2Fs3.amazonaws.com%2Fstatic.slid.es%2Fimages%2Fdefault-profile-picture.png","paid":false,"pro":false,"lite":false,"team_id":null,"settings":{"id":511959,"present_controls":true,"present_upsizing":true,"present_pointer":false,"present_notes":true}},"background_transition":"slide","transition":"slide","theme_id":null,"theme_font":"montserrat","theme_color":"silver-green","auto_slide_interval":0,"comments_enabled":true,"forking_enabled":true,"rolling_links":false,"center":false,"should_loop":false,"share_notes":false,"slide_number":true,"rtl":false,"version":2,"collaborative":null,"deck_user_editor_limit":1,"data_updated_at":1491883774642,"font_typekit":null,"font_google":null}};
+</script>
+    <script defer="defer" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/application-f82f945e1b867032c6f706da4fef427a.js"></script>
+    	<script defer="defer" src="Design%20Patterns%20by%20Abhilaksh%20Sharma_files/deck-01ada6089a1301345ddfa7e6c9bacfc0.js"></script>
+	
+
+
+  
+
+<iframe style="display: none;"></iframe></body></html>

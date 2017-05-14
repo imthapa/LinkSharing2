@@ -21,8 +21,9 @@ class UserController {
 //        profilePageVO.photo = session.user.photo
         userDetailsVO.userId = user.id
         List<TopicVO> subscriptionList = User.getSubscribedTopic(user)
-        List<InboxVO> messages = user.getUnReadResources()
-        render view: 'dashboard', model: [users: userDetailsVO, subscriptionList: subscriptionList, messages: messages]
+        List<PostsVO> messages = user.getUnReadResources()
+        log.info("------------------------------------------ $messages")
+        render view: 'dashboard', model: [users: userDetailsVO, subscriptionList: subscriptionList, resourceList: messages]
     }
 /*
     def index(SearchCO searchCO){

@@ -36,10 +36,12 @@ class ReadingItem {
     //working fine
     static def changeIsRead(Long id, Boolean isRead) {
         int flag = ReadingItem.executeUpdate("update ReadingItem set isRead=:isRead where id =:id", [isRead: isRead, id: id])
-        if (flag == 0)
+        if (flag == 0){
             return "error"
-        else
+        }
+        else{
             return "successfully updated"
+        }
     }
 
 }

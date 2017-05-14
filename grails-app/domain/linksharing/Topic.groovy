@@ -4,6 +4,7 @@ import com.ttnd.linksharing.co.SearchCO
 import com.ttnd.linksharing.util.Seriousness
 import com.ttnd.linksharing.util.Visibility
 import com.ttnd.linksharing.vo.InboxVO
+import com.ttnd.linksharing.vo.PostsVO
 import com.ttnd.linksharing.vo.TopicVO
 import com.ttnd.linksharing.vo.UserDetailsVO
 import org.hibernate.sql.JoinType
@@ -182,10 +183,11 @@ class Topic {
     }
 
     static def getSearched(SearchCO searchCO) {
-        List<InboxVO> searchResult = []
+        List<PostsVO> searchResult = []
         List result = Topic.createCriteria().list() {
             createAlias("resource", "r", JoinType.LEFT_OUTER_JOIN)
             projections {
+                property('id')
                 property('name')
                 property('r.id')
                 property('r.description')
@@ -199,8 +201,13 @@ class Topic {
             }
 //            maxResults 5
         }
+//        result.each {
+//            PostsVOList.add(new PostsVO(topicName: it[0].name, resourceID: it[1],
+//                    createdBy: it[3], resourceDescription: it[2],topicId: it[0].id))
+//        }
         result.each {
-            searchResult.add(new InboxVO(topicName: it[0], resourceID: it[1], createdBy: it[3], description: it[2]))
+            searchResult.add(new PostsVO(topicName: it[1], resourceID: it[2],
+                    createdBy: it[4], resourceDescription: it[3],topicId: it[0]))
         }
         println("akkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk $searchResult}")
         searchResult

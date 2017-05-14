@@ -52,7 +52,7 @@
         </div>
 
         <div class="panel-body">
-            <g:render template="posts" model="[postsList: posts]"/>
+            <g:render template="posts" model="[resourceList: posts]"/>
         </div>
     </div>
 </div>

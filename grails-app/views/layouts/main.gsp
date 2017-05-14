@@ -1,21 +1,10 @@
 <!doctype html>
-<html lang="en" class="no-js">
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>
         <g:layoutTitle default="Linksharing"/>
     </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <asset:stylesheet src="application.css"/>
-    %{--<asset:stylesheet src="myCustom.css"/>--}%
-    %{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}%
-    %{--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">--}%
-    %{--<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"--}%
-    %{--rel="stylesheet"  type='text/css'>--}%
-    %{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--}%
-    %{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--}%
-
     <g:layoutHead/>
 </head>
 
@@ -44,10 +33,7 @@
 
                 <div class="dropdown"> <g:if test="${session.user}">
                     <span class="dropdown-toggle glyphicon glyphicon-music" id="menu1" data-toggle="dropdown">
-
                             ${session.user.userName}
-
-
                     </span>
                     %{-- <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Tutorials
                          <span class="caret"></span></button>--}%
@@ -98,6 +84,6 @@
 
 <g:include controller="home" action="showMessage"/>
 <asset:javascript src="application.js"/>
-<asset:deferredScripts/>
+%{--<asset:deferredScripts/>--}%
 </body>
 </html>
