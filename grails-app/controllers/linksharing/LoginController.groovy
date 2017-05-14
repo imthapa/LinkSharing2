@@ -11,7 +11,7 @@ class LoginController {
         // log.info("${session.user}")
         //  if (session.user != null) {
 //          log.info("aldhfkhdfkjhfkjhk")
-        redirect(controller: 'user', action: 'index')
+        redirect(controller: 'user', action: 'index',params: [message:params.message])
         //   } else {
         //       List r = Resource.topPost()
         //     render "$r"
@@ -34,9 +34,12 @@ class LoginController {
                 log.info("i am active hahahahaha")
                 session.user = user//.userName
                 log.info("${session.user.userName} is loggedIn")
-                redirect(action: 'index')
+                flash.message = message(code: "successful.login", args: [user.userName]);
+//                render(view: '/user/dashboard', )
+                redirect(action: 'index',params: [message:flash.message])
             } else {
-                flash.error = "Your account is not active"
+                flash.message = message(code: "account.not.active", args: [user.userName]);
+//                flash.error = "Your account is not active"
                 //todo Q7. If user is not active then set flash.error 'Your account is not active'
                 render "${flash.error}"
             }

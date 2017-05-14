@@ -40,18 +40,29 @@ class User {
         email(unique: true, blank: false, nullable: false, email: true)
         userName(unique: true)
         //todo Q23. If user is set the success should be rendered - Validation message should be on email(null,blank,email,unique), username(null,blank,unique), firstName(null,blank), lastName (null,blank), password(null,blank,minsize), confirmPassword (null,blank,customvalidator)
-        password(blank: false, nullable: false, size: 5..15, validator: {
+        password(blank: false, nullable: false, size: 5..15)
+           /*     validator: {
             val, obj ->
                 //for register and update false and true respectively.
                 if (!obj.id)
-                    val == obj.confirmPassword
-        })
+                    val.equals(obj.confirmPassword)
+        })*/
         firstName(blank: false, nullable: false)
         lastName(blank: false, nullable: false)
         photo(nullable: true)
         admin(nullable: true)
         active(nullable: true)
-        confirmPassword(nullable: true, blank: true)
+//        confirmPassword(nullable: true, blank: true)
+        /*confirmPassword(blank: true, nullable: true, validator: { val, obj ->
+            if (!val.equals(obj.password)) {
+                return 'com.ttn.linksharing.User.confirmPassword.validator'
+            }
+        })*/
+        confirmPassword(bindable: true, nullable: true, blank: true, validator: { val, obj ->
+            if (!obj.id && (obj.password != val || !val)) {
+                return 'password.match.failed'
+            }
+        })
     }
 
     /*

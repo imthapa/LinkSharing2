@@ -15,6 +15,8 @@ import org.hibernate.resource.transaction.backend.jta.internal.synchronization.E
 class TopicController {
 
     def topicService
+
+    def mailService
 //    TopicService topicService
 
     def index() {
@@ -124,5 +126,23 @@ class TopicController {
         List<InboxVO> searchResult =  Topic.getSearched(searchCO)
         log.info("$searchResult")
         render(view: "search", model: ["totalResult":searchResult.size(),"searchResult":searchResult,'topics':new TopicVO(name:  searchCO.q)])
+    }
+
+    def shareTopic(String email, long id) {
+
+        def msg;
+        String inviter = session.user.userName
+        String topicName = Topic.get(id).name
+        mailService.sendMail {
+            from "ishwarmanithapa@mgmail.com"
+            to email
+            cc "ishwarmani.thapa@tothenew.com"
+            subject "invite from link sharing"
+            text "Hi, You have been invite by ${inviter} to subscribe to ${topicName}"
+
+        }
+        flash.message = message(code: "invite.success")
+        msg = flash.message
+        redirect(controller: "user", action: "index", params: [message: msg])
     }
 }

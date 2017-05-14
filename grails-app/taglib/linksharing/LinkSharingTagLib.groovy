@@ -44,10 +44,10 @@ class LinkSharingTagLib {
             if (readingItem) {
                 if (readingItem.isRead) {
                     body = "Mark As Unread"
-                    isRead = true
+                    isRead = false
                 } else {
                     body = "Mark As Read"
-                    isRead = false
+                    isRead = true
                 }
                 out << link(controller: 'readingItem', action: 'changeIsRead', name: 'readingItem',
                         params: [id: resource.id, isRead: isRead], body)

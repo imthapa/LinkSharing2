@@ -2,8 +2,8 @@
     <div class="panel-heading">Profile</div>
 
     <div class="panel-body">
-        <g:form method="post" class="form-horizontal" enctype="multipart/form-data" controller="login"
-                action="register">
+        <g:form method="post" class="form-horizontal" enctype="multipart/form-data" controller="user"
+                action="updateProfile">
             <div class="form-group">
                 <div class="control-label col-sm-4"><label class="pull-left">Firstname*</label></div>
 

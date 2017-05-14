@@ -4,17 +4,21 @@
     </div>
 
     <div class="panel-body">
-        <form class="form-inline myform">
-            <span>Password*</span>
-            <input type="text" class="form-control pull-right" name="firstname"
+        <g:form class="form-inline myform" controller="user" action="updatePassword">
+            <span>Old Password*</span>
+            <input type="text" class="form-control pull-right" name="oldPassword"
+                   placeholder="old password"/>
+            <br><br>
+            <span>New Password*</span>
+            <input type="text" class="form-control pull-right" name="password"
                    placeholder="password"/>
             <br><br>
             <span>Confirm password*</span>
-            <input type="text" class="form-control pull-right" name="lastname"
+            <input type="text" class="form-control pull-right" name="confirmPassword"
                    placeholder="confirm password"/>
             <br><br>
             <input type="submit" class="form-control btn btn-info pull-right" value="update">
-        </form>
+        </g:form>
 
     </div>
 </div>

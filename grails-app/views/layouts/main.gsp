@@ -22,34 +22,41 @@
 
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
+                <g:if test="${session.user}">
+                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                            data-target="#sendInvitation">Send Invitation</button>
+                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                            data-target="#topicCreate">Create Topic</button>
+                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                            data-target="#linkCreate">Create Link</button>
+                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                            data-target="#docCreate">Create Doc</button>
+                </g:if>
+            %{--<span class="glyphicon glyphicon-file" data-toggle="modal" data-target="#docCreate"></span>--}%
 
-                %{--<span class="glyphicon glyphicon-file" data-toggle="modal" data-target="#docCreate"></span>--}%
-                <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
-                        data-target="#topicCreate">Create Topic</button>
-                <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
-                        data-target="#linkCreate">Create Link</button>
-                <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
-                        data-target="#docCreate">Create Doc</button>
 
-                <div class="dropdown"> <g:if test="${session.user}">
+                <div class="dropdown"><g:if test="${session.user}">
                     <span class="dropdown-toggle glyphicon glyphicon-music" id="menu1" data-toggle="dropdown">
-                            ${session.user.userName}
+                        ${session.user.userName}
                     </span>
-                    %{-- <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Tutorials
-                         <span class="caret"></span></button>--}%
+                %{-- <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Tutorials
+                     <span class="caret"></span></button>--}%
                     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                         %{--<li role="presentation"><a role="menuitem" tabindex="-1" href="/user/">Profile</a></li>--}%
-                        <li role="presentation"><g:link action="edit" controller="user" params='["id": "${session.user.id}"]'>Profile</g:link></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Users</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Topics</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Posts</a></li>
+                        <li role="presentation"><g:link action="edit" controller="user"
+                                                        params='["id": "${session.user.id}"]'>Profile</g:link></li>
+                        <g:if test="${session.user.admin}">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Users</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Topics</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Posts</a></li>
+                        </g:if>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="/login/logout">Logout
-                            %{--<g:if test="${session.user}">
-                                Logout
-                            </g:if>
-                            <g:else>
-                                Sign in
-                            </g:else>--}%
+                        %{--<g:if test="${session.user}">
+                            Logout
+                        </g:if>
+                        <g:else>
+                            Sign in
+                        </g:else>--}%
                         </a></li>
 
                     </ul>
@@ -81,6 +88,7 @@
 <g:render template="/resource/linkCreate" model="[resource: resource]"/>
 <g:render template="/resource/docResource" model="[resource: resource]"/>
 <g:render template="/topic/create" model="[topic: topic]"/>
+<g:render template="/topic/invite"/>
 
 <g:include controller="home" action="showMessage"/>
 <asset:javascript src="application.js"/>

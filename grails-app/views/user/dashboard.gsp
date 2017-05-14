@@ -5,10 +5,12 @@
 </head>
 
 <body>
+<g:render template="../message"/>
 <div class="col-md-5">
+
     <div class="panel panel-default">
         <div class="panel-body">
-            <g:render template="show"/>
+            <g:render template="/user/show"/>
         </div>
     </div>
 
